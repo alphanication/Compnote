@@ -33,8 +33,6 @@ fun MainScreen(navController: NavController) {
     val mViewModel: MainViewModel =
         viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
 
-    val notes = mViewModel.readTest.observeAsState(listOf()).value
-
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
@@ -52,11 +50,7 @@ fun MainScreen(navController: NavController) {
         },
         modifier = Modifier.padding(bottom = 8.dp, end = 8.dp)
     ) {
-        LazyColumn {
-            items(notes) { note ->
-                NoteItem(navController = navController, note = note)
-            }
-        }
+
     }
 }
 
