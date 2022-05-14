@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-    fun initDatabase() {
-        Log.d("alpha33", "vm main init")
+    fun initDatabase(type: String) {
+        Log.d("alpha33", "vm main init with type: $type")
     }
 }
 

@@ -1,5 +1,6 @@
 package com.example.compnote.screens
 
+import android.app.Application
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
@@ -7,12 +8,21 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.compnote.MainViewModel
+import com.example.compnote.MainViewModelFactory
 import com.example.compnote.navigation.NavRoute
+import com.example.compnote.util.Constants
 
 @Composable
 fun StartScreen(navController: NavController) {
+    val context = LocalContext.current
+    val mViewModel: MainViewModel =
+        viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
+
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -24,6 +34,7 @@ fun StartScreen(navController: NavController) {
             Text(text = "What will we use?")
             Button(
                 onClick = {
+                    mViewModel.initDatabase(Constants.TYPE_ROOM)
                     navController.navigate(route = NavRoute.Main.route)
                 },
                 modifier = Modifier
@@ -34,6 +45,7 @@ fun StartScreen(navController: NavController) {
             }
             Button(
                 onClick = {
+                    mViewModel.initDatabase(Constants.TYPE_FIREBASE)
                     navController.navigate(route = NavRoute.Main.route)
                 },
                 modifier = Modifier
