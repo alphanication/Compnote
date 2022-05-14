@@ -15,7 +15,8 @@ import androidx.navigation.NavController
 import com.example.compnote.MainViewModel
 import com.example.compnote.MainViewModelFactory
 import com.example.compnote.navigation.NavRoute
-import com.example.compnote.util.Constants
+import com.example.compnote.util.TYPE_FIREBASE
+import com.example.compnote.util.TYPE_ROOM
 
 @Composable
 fun StartScreen(navController: NavController) {
@@ -34,7 +35,7 @@ fun StartScreen(navController: NavController) {
             Text(text = "What will we use?")
             Button(
                 onClick = {
-                    mViewModel.initDatabase(Constants.TYPE_ROOM)
+                    mViewModel.initDatabase(TYPE_ROOM)
                     navController.navigate(route = NavRoute.Main.route)
                 },
                 modifier = Modifier
@@ -45,7 +46,7 @@ fun StartScreen(navController: NavController) {
             }
             Button(
                 onClick = {
-                    mViewModel.initDatabase(Constants.TYPE_FIREBASE)
+                    mViewModel.initDatabase(TYPE_FIREBASE)
                     navController.navigate(route = NavRoute.Main.route)
                 },
                 modifier = Modifier
