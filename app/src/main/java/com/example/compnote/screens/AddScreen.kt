@@ -15,12 +15,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.compnote.MainViewModel
 import com.example.compnote.navigation.NavRoute
 
 @Composable
-fun AddScreen(navController: NavController) {
+fun AddScreen(navController: NavController, viewModel: MainViewModel) {
+
     var title by remember { mutableStateOf("") }
     var subtitle by remember { mutableStateOf("") }
+
     Scaffold {
         Column(
             modifier = Modifier.fillMaxSize(),
