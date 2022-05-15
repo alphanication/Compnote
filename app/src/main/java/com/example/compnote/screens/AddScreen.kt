@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.compnote.MainViewModel
+import com.example.compnote.models.Note
 import com.example.compnote.navigation.NavRoute
 
 @Composable
@@ -23,6 +24,7 @@ fun AddScreen(navController: NavController, viewModel: MainViewModel) {
 
     var title by remember { mutableStateOf("") }
     var subtitle by remember { mutableStateOf("") }
+    var isButtonEnabled by remember { mutableStateOf(false) }
 
     Scaffold {
         Column(
@@ -38,17 +40,30 @@ fun AddScreen(navController: NavController, viewModel: MainViewModel) {
             )
             OutlinedTextField(
                 value = title,
-                onValueChange = { title = it },
-                label = { Text(text = "Note title") }
+                onValueChange = {
+                    title = it
+                    isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
+                },
+                label = { Text(text = "Note title") },
+                isError = title.isEmpty()
             )
             OutlinedTextField(
                 value = subtitle,
-                onValueChange = { subtitle = it },
-                label = { Text(text = "Note Subtitle") }
+                onValueChange = {
+                    subtitle = it
+                    isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
+                },
+                label = { Text(text = "Note Subtitle") },
+                isError = subtitle.isEmpty()
             )
             Button(
                 modifier = Modifier.padding(top = 16.dp),
-                onClick = { navController.navigate(NavRoute.Main.route) }
+                enabled = isButtonEnabled,
+                onClick = {
+                    viewModel.addNote(note = Note(title = title, subtitle = subtitle)) {
+                        navController.navigate(NavRoute.Main.route)
+                    }
+                }
             ) {
                 Text(text = "ADD NOTE")
             }
