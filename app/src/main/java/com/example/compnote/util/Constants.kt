@@ -21,6 +21,8 @@ object Constants {
         const val WHAT_WILL_WE_USE = "What will we use?"
         const val ROOM_DATABASE = "ROOM DATABASE"
         const val FIREBASE_DATABASE = "FIREBASE DATABASE"
+        const val ID = "id"
+        const val NONE = "none"
     }
 
     object Screens {
