@@ -65,7 +65,7 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
                         onClick = {
                             viewModel.updateNote(note = Note(id = note.id, title = title, subtitle = subtitle)
                             ) {
-                                navController.navigate(NavRoute.Main.route)
+                                navController.navigate(NavRoute.MainScreen.route)
                             }
                         }
                     ) {
@@ -127,7 +127,7 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
                     Button(
                         onClick = {
                             viewModel.deleteNote(note = note) {
-                                navController.navigate(NavRoute.Main.route)
+                                navController.navigate(NavRoute.MainScreen.route)
                             }
                         }
                     ) {
@@ -140,7 +140,7 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
                         .padding(horizontal = 32.dp)
                         .fillMaxWidth(),
                     onClick = {
-                        navController.navigate(NavRoute.Main.route)
+                        navController.navigate(NavRoute.MainScreen.route)
                     }
                 ) {
                     Text(text = Constants.Keys.BACK)

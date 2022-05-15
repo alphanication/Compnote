@@ -30,7 +30,7 @@ fun MainScreen(navController: NavController, viewModel: MainViewModel) {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate(NavRoute.Add.route)
+                    navController.navigate(NavRoute.AddScreen.route)
                 },
                 backgroundColor = Color.Blue,
             ) {
@@ -58,7 +58,7 @@ fun NoteItem(navController: NavController, note: Note) {
             .fillMaxWidth()
             .padding(vertical = 8.dp, horizontal = 24.dp)
             .clickable {
-                navController.navigate(NavRoute.Note.route + "/${note.id}")
+                navController.navigate(NavRoute.NoteScreen.route + "/${note.id}")
             },
         elevation = 6.dp
     ) {
