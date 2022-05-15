@@ -16,9 +16,6 @@ object Constants {
         const val NOTE_TITLE = "Note TITLE"
         const val NOTE_SUBTITLE = "Note SUBTITLE"
         const val ADD_NOTE = "ADD NOTE"
-        const val WHAT_WILL_WE_USE = "What will we use?"
-        const val ROOM_DATABASE = "ROOM DATABASE"
-        const val FIREBASE_DATABASE = "FIREBASE DATABASE"
         const val ID = "id"
         const val NONE = "none"
         const val UPDATE = "UPDATE"
@@ -32,7 +29,6 @@ object Constants {
     }
 
     object Screens {
-        const val START_SCREEN = "start_screen"
         const val MAIN_SCREEN = "main_screen"
         const val ADD_SCREEN = "add_screen"
         const val NOTE_SCREEN = "note_screen"

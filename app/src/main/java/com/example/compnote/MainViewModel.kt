@@ -9,7 +9,6 @@ import com.example.compnote.database.room.AppRoomDatabase
 import com.example.compnote.database.room.repository.RoomRepository
 import com.example.compnote.models.Note
 import com.example.compnote.util.REPOSITORY
-import com.example.compnote.util.TYPE_ROOM
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -17,14 +16,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     val context = application
 
-    fun initDatabase(type: String, onSuccess: () -> Unit) {
-        when (type) {
-            TYPE_ROOM -> {
-                val dao = AppRoomDatabase.getInstance(context = context).getRoomDao()
-                REPOSITORY = RoomRepository(dao)
-                onSuccess()
-            }
-        }
+    init {
+        val dao = AppRoomDatabase.getInstance(context = context).getRoomDao()
+        REPOSITORY = RoomRepository(dao)
     }
 
     fun addNote(note: Note, onSuccess: () -> Unit) {
