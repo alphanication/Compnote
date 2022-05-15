@@ -125,7 +125,11 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
                         Text(text = Constants.Keys.UPDATE)
                     }
                     Button(
-                        onClick = { /*TODO*/ }
+                        onClick = {
+                            viewModel.deleteNote(note = note) {
+                                navController.navigate(NavRoute.Main.route)
+                            }
+                        }
                     ) {
                         Text(text = Constants.Keys.DELETE)
                     }
