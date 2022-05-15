@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.compnote.MainViewModel
 import com.example.compnote.navigation.NavRoute
+import com.example.compnote.util.Constants
 import com.example.compnote.util.TYPE_FIREBASE
 import com.example.compnote.util.TYPE_ROOM
 
@@ -24,7 +25,7 @@ fun StartScreen(navController: NavController, viewModel: MainViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = "What will we use?")
+            Text(text = Constants.Keys.WHAT_WILL_WE_USE)
             Button(
                 onClick = {
                     viewModel.initDatabase(TYPE_ROOM) {
@@ -35,7 +36,7 @@ fun StartScreen(navController: NavController, viewModel: MainViewModel) {
                     .width(200.dp)
                     .padding(8.dp)
             ) {
-                Text(text = "ROOM DATABASE")
+                Text(text = Constants.Keys.ROOM_DATABASE)
             }
             Button(
                 onClick = {
@@ -47,7 +48,7 @@ fun StartScreen(navController: NavController, viewModel: MainViewModel) {
                     .width(200.dp)
                     .padding(8.dp)
             ) {
-                Text(text = "FIREBASE DATABASE")
+                Text(text = Constants.Keys.FIREBASE_DATABASE)
             }
         }
     }

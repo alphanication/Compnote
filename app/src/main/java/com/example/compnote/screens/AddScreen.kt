@@ -18,6 +18,8 @@ import androidx.navigation.NavController
 import com.example.compnote.MainViewModel
 import com.example.compnote.models.Note
 import com.example.compnote.navigation.NavRoute
+import com.example.compnote.util.Constants
+import com.example.compnote.util.Constants.Keys.ADD_NOTE
 
 @Composable
 fun AddScreen(navController: NavController, viewModel: MainViewModel) {
@@ -33,7 +35,7 @@ fun AddScreen(navController: NavController, viewModel: MainViewModel) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Add new note",
+                text = Constants.Keys.ADD_NEW_NOTE,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(8.dp)
@@ -44,7 +46,7 @@ fun AddScreen(navController: NavController, viewModel: MainViewModel) {
                     title = it
                     isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
                 },
-                label = { Text(text = "Note title") },
+                label = { Text(text = Constants.Keys.NOTE_TITLE) },
                 isError = title.isEmpty()
             )
             OutlinedTextField(
@@ -53,7 +55,7 @@ fun AddScreen(navController: NavController, viewModel: MainViewModel) {
                     subtitle = it
                     isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
                 },
-                label = { Text(text = "Note Subtitle") },
+                label = { Text(text = Constants.Keys.NOTE_SUBTITLE) },
                 isError = subtitle.isEmpty()
             )
             Button(
@@ -65,7 +67,7 @@ fun AddScreen(navController: NavController, viewModel: MainViewModel) {
                     }
                 }
             ) {
-                Text(text = "ADD NOTE")
+                Text(text = ADD_NOTE)
             }
         }
     }

@@ -6,12 +6,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.compnote.MainViewModel
 import com.example.compnote.screens.*
+import com.example.compnote.util.Constants
 
 sealed class NavRoute(val route: String) {
-    object Start : NavRoute(route = "start_screen")
-    object Main : NavRoute(route = "main_screen")
-    object Add : NavRoute(route = "add_screen")
-    object Note : NavRoute(route = "note_screen")
+    object Start : NavRoute(route = Constants.Screens.START_SCREEN)
+    object Main : NavRoute(route = Constants.Screens.MAIN_SCREEN)
+    object Add : NavRoute(route = Constants.Screens.ADD_SCREEN)
+    object Note : NavRoute(route = Constants.Screens.NOTE_SCREEN)
 }
 
 @Composable
