@@ -16,13 +16,14 @@ object Constants {
         const val NOTE_TITLE = "Note TITLE"
         const val NOTE_SUBTITLE = "Note SUBTITLE"
         const val ADD_NOTE = "ADD NOTE"
-        const val TITLE = "Title"
-        const val SUBTITLE = "Subtitle"
         const val WHAT_WILL_WE_USE = "What will we use?"
         const val ROOM_DATABASE = "ROOM DATABASE"
         const val FIREBASE_DATABASE = "FIREBASE DATABASE"
         const val ID = "id"
         const val NONE = "none"
+        const val UPDATE = "UPDATE"
+        const val DELETE = "DELETE"
+        const val BACK = "BACK"
     }
 
     object Screens {
