@@ -63,7 +63,7 @@ fun AddScreen(navController: NavController, viewModel: MainViewModel) {
                 enabled = isButtonEnabled,
                 onClick = {
                     viewModel.addNote(note = Note(title = title, subtitle = subtitle)) {
-                        navController.navigate(NavRoute.Main.route)
+                        navController.navigate(NavRoute.MainScreen.route)
                     }
                 }
             ) {

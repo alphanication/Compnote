@@ -10,20 +10,14 @@ import com.example.compnote.screens.MainScreen
 import com.example.compnote.screens.NoteScreen
 import com.example.compnote.util.Constants
 
-sealed class NavRoute(val route: String) {
-    object Main : NavRoute(route = Constants.Screens.MAIN_SCREEN)
-    object Add : NavRoute(route = Constants.Screens.ADD_SCREEN)
-    object Note : NavRoute(route = Constants.Screens.NOTE_SCREEN)
-}
-
 @Composable
 fun CompnoteNavHost(mViewModel: MainViewModel) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = NavRoute.Main.route) {
+    NavHost(navController = navController, startDestination = NavRoute.MainScreen.route) {
 
-        composable(NavRoute.Main.route) { MainScreen(navController = navController, viewModel = mViewModel) }
-        composable(NavRoute.Add.route) { AddScreen(navController = navController, viewModel = mViewModel) }
-        composable(NavRoute.Note.route + "/{${Constants.Keys.ID}}") { backStackEntry ->
+        composable(NavRoute.MainScreen.route) { MainScreen(navController = navController, viewModel = mViewModel) }
+        composable(NavRoute.AddScreen.route) { AddScreen(navController = navController, viewModel = mViewModel) }
+        composable(NavRoute.NoteScreen.route + "/{${Constants.Keys.ID}}") { backStackEntry ->
             NoteScreen(
                 navController = navController,
                 viewModel = mViewModel,
