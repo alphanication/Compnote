@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.compnote.MainViewModel
 import com.example.compnote.models.Note
+import com.example.compnote.navigation.NavRoute
 import com.example.compnote.util.Constants
 
 @Composable
@@ -80,7 +81,9 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
                     .padding(top = 16.dp)
                     .padding(horizontal = 32.dp)
                     .fillMaxWidth(),
-                onClick = { /*TODO*/ }
+                onClick = {
+                    navController.navigate(NavRoute.Main.route)
+                }
             ) {
                 Text(text = Constants.Keys.BACK)
             }
