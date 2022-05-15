@@ -1,9 +1,7 @@
 package com.example.compnote.screens
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -38,7 +36,7 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
         ) {
             Card(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
                     .padding(32.dp)
             ) {
                 Column(
@@ -58,6 +56,33 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
                         modifier = Modifier.padding(top = 8.dp)
                     )
                 }
+            }
+            Row(
+                modifier = Modifier
+                    .padding(32.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
+                Button(
+                    onClick = { /*TODO*/ }
+                ) {
+                    Text(text = Constants.Keys.UPDATE)
+                }
+                Button(
+                    onClick = { /*TODO*/ }
+                ) {
+                    Text(text = Constants.Keys.DELETE)
+                }
+            }
+            Button(
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .padding(horizontal = 32.dp)
+                    .fillMaxWidth(),
+                onClick = { /*TODO*/ }
+            ) {
+                Text(text = Constants.Keys.BACK)
             }
         }
     }
