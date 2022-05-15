@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.compnote.MainViewModel
+import com.example.compnote.util.Constants
 
 @Composable
 fun NoteScreen(navController: NavController, viewModel: MainViewModel) {
@@ -36,13 +37,13 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Title",
+                        text = Constants.Keys.TITLE,
                         fontSize = 32.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(top = 16.dp)
                     )
                     Text(
-                        text = "Subtitle",
+                        text = Constants.Keys.SUBTITLE,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.Light,
                         modifier = Modifier.padding(top = 8.dp)
