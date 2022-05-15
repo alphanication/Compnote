@@ -24,6 +24,11 @@ object Constants {
         const val UPDATE = "UPDATE"
         const val DELETE = "DELETE"
         const val BACK = "BACK"
+        const val EDIT_NOTE = "EDIT NOTE"
+        const val EMPTY = ""
+        const val TITLE = "Title"
+        const val SUBTITLE = "Subtitle"
+        const val UPDATE_NOTE = "UPDATE NOTE"
     }
 
     object Screens {
