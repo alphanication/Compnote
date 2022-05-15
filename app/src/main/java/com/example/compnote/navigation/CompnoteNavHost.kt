@@ -15,13 +15,23 @@ fun CompnoteNavHost(mViewModel: MainViewModel) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = NavRoute.MainScreen.route) {
 
-        composable(NavRoute.MainScreen.route) { MainScreen(navController = navController, viewModel = mViewModel) }
-        composable(NavRoute.AddScreen.route) { AddScreen(navController = navController, viewModel = mViewModel) }
-        composable(NavRoute.NoteScreen.route + "/{${Constants.Keys.ID}}") { backStackEntry ->
+        composable(route = NavRoute.MainScreen.route) {
+            MainScreen(
+                navController = navController,
+                viewModel = mViewModel
+            )
+        }
+        composable(route = NavRoute.AddScreen.route) {
+            AddScreen(
+                navController = navController,
+                viewModel = mViewModel
+            )
+        }
+        composable(route = NavRoute.NoteScreen.route + "/{${Constants.Keys.NOTE_ID}}") { backStackEntry ->
             NoteScreen(
                 navController = navController,
                 viewModel = mViewModel,
-                noteId = backStackEntry.arguments?.getString(Constants.Keys.ID)
+                noteId = backStackEntry.arguments?.getString(Constants.Keys.NOTE_ID)
             )
         }
     }

@@ -12,7 +12,6 @@ object Constants {
         const val NOTE_TITLE = "Note TITLE"
         const val NOTE_SUBTITLE = "Note SUBTITLE"
         const val ADD_NOTE = "ADD NOTE"
-        const val ID = "id"
         const val NONE = "none"
         const val UPDATE = "UPDATE"
         const val DELETE = "DELETE"
@@ -22,6 +21,7 @@ object Constants {
         const val TITLE = "Title"
         const val SUBTITLE = "Subtitle"
         const val UPDATE_NOTE = "UPDATE NOTE"
+        const val NOTE_ID = "note_id"
     }
 
     object Screens {
