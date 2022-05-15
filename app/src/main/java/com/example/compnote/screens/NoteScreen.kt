@@ -1,6 +1,5 @@
 package com.example.compnote.screens
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,9 +14,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.compnote.MainViewModel
 
 @Composable
-fun NoteScreen(navController: NavController) {
+fun NoteScreen(navController: NavController, viewModel: MainViewModel) {
     Scaffold(
         modifier = Modifier.fillMaxSize()
     ) {
