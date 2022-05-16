@@ -1,20 +1,22 @@
 package com.example.compnote
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import android.content.Context
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.compnote.database.room.AppRoomDatabase
 import com.example.compnote.database.room.repository.RoomRepository
 import com.example.compnote.models.Note
 import com.example.compnote.util.REPOSITORY
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
-
-    val context = application
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    @ApplicationContext val context: Context
+) : ViewModel() {
 
     init {
         val dao = AppRoomDatabase.getInstance(context = context).getRoomDao()
@@ -52,13 +54,4 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun readAllNotes() = REPOSITORY.readAll
-}
-
-class MainViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(application = application) as T
-        }
-        throw IllegalArgumentException("Unknown viewModel class")
-    }
 }
