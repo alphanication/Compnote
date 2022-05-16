@@ -4,12 +4,16 @@ import androidx.lifecycle.LiveData
 import com.example.compnote.database.DatabaseRepository
 import com.example.compnote.database.room.dao.NoteRoomDao
 import com.example.compnote.models.Note
+import javax.inject.Inject
 
-class RoomRepository(private val noteRoomDao: NoteRoomDao) : DatabaseRepository {
+class DatabaseRepositoryRoomImpl @Inject constructor (
+    private val noteRoomDao: NoteRoomDao
+        ): DatabaseRepository {
+
     override val readAll: LiveData<List<Note>>
         get() = noteRoomDao.getAllNotes()
 
-    override suspend fun create(note: Note, onSuccess: () -> Unit) {
+    override suspend fun add(note: Note, onSuccess: () -> Unit) {
         noteRoomDao.addNote(note = note)
         onSuccess()
     }

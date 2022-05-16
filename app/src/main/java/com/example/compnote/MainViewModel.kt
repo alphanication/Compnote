@@ -1,31 +1,21 @@
 package com.example.compnote
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.compnote.database.room.AppRoomDatabase
-import com.example.compnote.database.room.repository.RoomRepository
+import com.example.compnote.database.room.repository.DatabaseRepositoryRoomImpl
 import com.example.compnote.models.Note
-import com.example.compnote.util.REPOSITORY
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    @ApplicationContext val context: Context
+    private val databaseRepositoryRoomImpl: DatabaseRepositoryRoomImpl
 ) : ViewModel() {
-
-    init {
-        val dao = AppRoomDatabase.getInstance(context = context).getRoomDao()
-        REPOSITORY = RoomRepository(dao)
-    }
-
     fun addNote(note: Note, onSuccess: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            REPOSITORY.create(note = note) {
+            databaseRepositoryRoomImpl.add(note = note) {
                 viewModelScope.launch(Dispatchers.Main) {
                     onSuccess()
                 }
@@ -35,7 +25,7 @@ class MainViewModel @Inject constructor(
 
     fun updateNote(note: Note, onSuccess: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            REPOSITORY.update(note = note) {
+            databaseRepositoryRoomImpl.update(note = note) {
                 viewModelScope.launch(Dispatchers.Main) {
                     onSuccess()
                 }
@@ -45,7 +35,7 @@ class MainViewModel @Inject constructor(
 
     fun deleteNote(note: Note, onSuccess: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            REPOSITORY.delete(note = note) {
+            databaseRepositoryRoomImpl.delete(note = note) {
                 viewModelScope.launch(Dispatchers.Main) {
                     onSuccess()
                 }
@@ -53,5 +43,5 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun readAllNotes() = REPOSITORY.readAll
+    fun readAllNotes() = databaseRepositoryRoomImpl.readAll
 }
