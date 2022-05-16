@@ -1,9 +1,5 @@
 package com.example.compnote.util
 
-import com.example.compnote.database.DatabaseRepository
-
-lateinit var REPOSITORY: DatabaseRepository
-
 object Constants {
     object Keys {
         const val NOTES_DATABASE = "notes_database"
