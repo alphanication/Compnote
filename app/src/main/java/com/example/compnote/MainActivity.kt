@@ -1,29 +1,28 @@
 package com.example.compnote
 
-import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.compnote.navigation.CompnoteNavHost
 import com.example.compnote.ui.theme.CompnoteTheme
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val mViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             CompnoteTheme {
-                val context = LocalContext.current
-                val mViewModel: MainViewModel =
-                    viewModel(factory = MainViewModelFactory(context.applicationContext as Application))
-
                 Scaffold(
                     topBar = {
                         TopAppBar(
