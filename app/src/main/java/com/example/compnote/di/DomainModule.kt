@@ -1,10 +1,7 @@
 package com.example.compnote.di
 
 import com.example.compnote.domain.repository.NoteRepository
-import com.example.compnote.domain.usecase.NoteAddUseCase
-import com.example.compnote.domain.usecase.NoteDeleteUseCase
-import com.example.compnote.domain.usecase.NoteReadAllUseCase
-import com.example.compnote.domain.usecase.NoteUpdateUseCase
+import com.example.compnote.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,5 +28,10 @@ object DomainModule {
     @Provides
     fun provideNoteUpdateUseCase(noteRepository: NoteRepository): NoteUpdateUseCase {
         return NoteUpdateUseCase(noteRepository = noteRepository)
+    }
+
+    @Provides
+    fun provideNoteGetByIdUseCase(noteRepository: NoteRepository) : NoteGetByIdUseCase {
+        return NoteGetByIdUseCase(noteRepository = noteRepository)
     }
 }
