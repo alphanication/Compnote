@@ -13,7 +13,7 @@ class NoteRepositoryImpl(
 ) : NoteRepository {
     override suspend fun readAll(): Flow<List<Note>> {
         return noteStorage.readAll().map {
-            NoteArrayListMapper().mapFromEntity(it)
+           NoteArrayListMapper().mapFromEntity(it)
         }
     }
 
@@ -33,5 +33,11 @@ class NoteRepositoryImpl(
         return noteStorage.delete(
             note = NoteMapper().mapToEntity(note)
         )
+    }
+
+    override suspend fun getNoteById(id: Int): Flow<Note> {
+        return noteStorage.getNoteById(id = id).map {
+            NoteMapper().mapFromEntity(it)
+        }
     }
 }
