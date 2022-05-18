@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.dp
 import com.example.compnote.navigation.CompnoteNavHost
 import com.example.compnote.ui.theme.CompnoteTheme
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

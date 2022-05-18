@@ -16,13 +16,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.compnote.MainViewModel
-import com.example.compnote.models.Note
+import com.example.compnote.domain.models.Note
 import com.example.compnote.navigation.NavRoute
 import com.example.compnote.util.Constants
 import com.example.compnote.util.Constants.Keys.ADD_NOTE
+import kotlinx.coroutines.launch
 
 @Composable
 fun AddScreen(navController: NavController, viewModel: MainViewModel) {
+
+    val coroutineScope = rememberCoroutineScope()
 
     var title by remember { mutableStateOf("") }
     var subtitle by remember { mutableStateOf("") }
@@ -62,8 +65,11 @@ fun AddScreen(navController: NavController, viewModel: MainViewModel) {
                 modifier = Modifier.padding(top = 16.dp),
                 enabled = isButtonEnabled,
                 onClick = {
-                    viewModel.addNote(note = Note(title = title, subtitle = subtitle)) {
-                        navController.navigate(NavRoute.MainScreen.route)
+                    coroutineScope.launch {
+                        viewModel.addNote(note = Note(title = title, subtitle = subtitle))
+                            .collect {
+                                if (it) navController.navigate(NavRoute.MainScreen.route)
+                            }
                     }
                 }
             ) {

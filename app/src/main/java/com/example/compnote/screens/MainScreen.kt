@@ -10,6 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,12 +20,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.compnote.MainViewModel
-import com.example.compnote.models.Note
+import com.example.compnote.domain.models.Note
 import com.example.compnote.navigation.NavRoute
 
 @Composable
 fun MainScreen(navController: NavController, viewModel: MainViewModel) {
-    val notes = viewModel.readAllNotes().observeAsState(listOf()).value
+    val notes = viewModel.allListNote.observeAsState(listOf()).value
 
     Scaffold(
         floatingActionButton = {
@@ -49,6 +50,10 @@ fun MainScreen(navController: NavController, viewModel: MainViewModel) {
             }
         }
     }
+
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.getAllNotes()
+    })
 }
 
 @Composable
