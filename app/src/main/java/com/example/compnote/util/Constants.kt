@@ -2,8 +2,6 @@ package com.example.compnote.util
 
 object Constants {
     object Keys {
-        const val NOTES_DATABASE = "notes_database"
-        const val NOTES_TABLE = "notes_table"
         const val ADD_NEW_NOTE = "ADD NEW NOTE"
         const val NOTE_TITLE = "Note TITLE"
         const val NOTE_SUBTITLE = "Note SUBTITLE"
