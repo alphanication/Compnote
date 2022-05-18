@@ -11,4 +11,6 @@ interface NoteStorage {
     suspend fun update(note: NoteEntity): Flow<Boolean>
 
     suspend fun delete(note: NoteEntity): Flow<Boolean>
+
+    suspend fun getNoteById(id: Int): Flow<NoteEntity>
 }

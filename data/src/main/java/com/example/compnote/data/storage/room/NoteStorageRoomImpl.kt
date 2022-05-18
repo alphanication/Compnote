@@ -24,8 +24,12 @@ class NoteStorageRoomImpl(
         emit(true)
     }.catch { emit(false) }
 
-    override suspend fun delete(note: NoteEntity): Flow<Boolean> = flow<Boolean> {
+    override suspend fun delete(note: NoteEntity): Flow<Boolean> = flow {
         noteRoomDao.deleteNote(note = note)
         emit(true)
     }.catch { emit(false) }
+
+    override suspend fun getNoteById(id: Int): Flow<NoteEntity> = flow {
+        noteRoomDao.getNoteById(id = id).collect { emit(it) }
+    }
 }
