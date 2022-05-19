@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.compnote.data.storage.models.NoteEntity
-import com.example.compnote.data.storage.util.Constants
+import com.example.compnote.data.storage.util.ConstantsStorage
 
 @Database(
     entities = [NoteEntity::class],
@@ -23,7 +23,7 @@ abstract class AppRoomDatabase : RoomDatabase() {
                 dbInstance = Room.databaseBuilder(
                     context,
                     AppRoomDatabase::class.java,
-                    Constants.Keys.NOTES_DATABASE
+                    ConstantsStorage.Keys.NOTES_DATABASE
                 ).build()
             }
 
