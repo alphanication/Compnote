@@ -13,11 +13,11 @@ interface NoteRoomDao {
     fun getNoteById(id: Int) : Flow<NoteEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addNote(note: NoteEntity)
+    fun addNote(note: NoteEntity)
 
     @Update
-    suspend fun updateNote(note: NoteEntity)
+    fun updateNote(note: NoteEntity)
 
-    @Delete
-    suspend fun deleteNote(note: NoteEntity)
+    @Query("DELETE FROM notes_table WHERE id = :id")
+    fun deleteNoteById(id: Int)
 }

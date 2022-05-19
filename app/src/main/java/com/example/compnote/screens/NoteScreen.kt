@@ -21,17 +21,24 @@ import kotlinx.coroutines.launch
 @Composable
 fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: String?) {
 
-    val notes = viewModel.allListNote.observeAsState(listOf()).value
-    val note = notes.firstOrNull { it.id == noteId?.toInt() } ?: Note(
-        title = Constants.Keys.NONE,
-        subtitle = Constants.Keys.NONE
-    )
+    val note = viewModel.note.observeAsState(
+        Note(
+            title = Constants.Keys.NONE,
+            subtitle = Constants.Keys.NONE
+        )
+    ).value
+
+    LaunchedEffect(key1 = Unit, block = {
+        if (noteId?.isNotEmpty() == true) viewModel.getNoteById(id = noteId.toInt())
+    })
+
+    val coroutineScope = rememberCoroutineScope()
 
     val bottomSheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
-    val coroutineScope = rememberCoroutineScope()
 
     var title by remember { mutableStateOf(Constants.Keys.EMPTY) }
     var subtitle by remember { mutableStateOf(Constants.Keys.EMPTY) }
+    var isButtonEnabled by remember { mutableStateOf(false) }
 
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
@@ -52,18 +59,25 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
                     )
                     OutlinedTextField(
                         value = title,
-                        onValueChange = { title = it },
+                        onValueChange = {
+                            title = it
+                            isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
+                                        },
                         label = { Text(text = Constants.Keys.TITLE) },
                         isError = title.isEmpty()
                     )
                     OutlinedTextField(
                         value = subtitle,
-                        onValueChange = { subtitle = it },
+                        onValueChange = {
+                            subtitle = it
+                            isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
+                        },
                         label = { Text(text = Constants.Keys.SUBTITLE) },
                         isError = subtitle.isEmpty()
                     )
                     Button(
                         modifier = Modifier.padding(top = 16.dp),
+                        enabled = isButtonEnabled,
                         onClick = {
                             coroutineScope.launch {
                                 viewModel.updateNote(note = Note(id = note.id, title = title, subtitle = subtitle))
@@ -131,10 +145,11 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
                     Button(
                         onClick = {
                             coroutineScope.launch {
-                                viewModel.deleteNote(note = note)
+                                viewModel.deleteNoteById(id = note.id)
                                     .collect {
                                         if (it) navController.navigate(NavRoute.MainScreen.route)
                                     }
+
                             }
                         }
                     ) {
@@ -156,7 +171,4 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
         }
     }
 
-    LaunchedEffect(key1 = true, block = {
-        viewModel.getAllNotes()
-    })
 }
