@@ -18,14 +18,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.compnote.presentation.MainViewModel
 import com.example.compnote.domain.models.Note
 import com.example.compnote.presentation.navigation.NavRoute
 
 @Composable
-fun MainScreen(navController: NavController, viewModel: MainViewModel) {
-    val notes = viewModel.allListNote.observeAsState(listOf()).value
+fun MainScreen(navController: NavController) {
+    val mViewModel = hiltViewModel<MainViewModel>()
+
+    val notes = mViewModel.allListNote.observeAsState(listOf()).value
 
     Scaffold(
         floatingActionButton = {
@@ -52,7 +55,7 @@ fun MainScreen(navController: NavController, viewModel: MainViewModel) {
     }
 
     LaunchedEffect(key1 = Unit, block = {
-        viewModel.getAllNotes()
+        mViewModel.getAllNotes()
     })
 }
 

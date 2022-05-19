@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.compnote.presentation.MainViewModel
 import com.example.compnote.domain.models.Note
@@ -19,9 +20,11 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: String?) {
+fun NoteScreen(navController: NavController,noteId: String?) {
 
-    val note = viewModel.note.observeAsState(
+    val mViewModel = hiltViewModel<MainViewModel>()
+
+    val note = mViewModel.note.observeAsState(
         Note(
             title = Constants.Keys.NONE,
             subtitle = Constants.Keys.NONE
@@ -29,7 +32,7 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
     ).value
 
     LaunchedEffect(key1 = Unit, block = {
-        if (noteId?.isNotEmpty() == true) viewModel.getNoteById(id = noteId.toInt())
+        if (noteId?.isNotEmpty() == true) mViewModel.getNoteById(id = noteId.toInt())
     })
 
     val coroutineScope = rememberCoroutineScope()
@@ -80,7 +83,7 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
                         enabled = isButtonEnabled,
                         onClick = {
                             coroutineScope.launch {
-                                viewModel.updateNote(note = Note(id = note.id, title = title, subtitle = subtitle))
+                                mViewModel.updateNote(note = Note(id = note.id, title = title, subtitle = subtitle))
                                     .collect {
                                         if (it) navController.navigate(NavRoute.MainScreen.route)
                                     }
@@ -145,7 +148,7 @@ fun NoteScreen(navController: NavController, viewModel: MainViewModel, noteId: S
                     Button(
                         onClick = {
                             coroutineScope.launch {
-                                viewModel.deleteNoteById(id = note.id)
+                                mViewModel.deleteNoteById(id = note.id)
                                     .collect {
                                         if (it) navController.navigate(NavRoute.MainScreen.route)
                                     }
