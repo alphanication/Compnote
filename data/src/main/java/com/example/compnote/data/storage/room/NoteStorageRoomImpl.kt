@@ -1,6 +1,5 @@
 package com.example.compnote.data.storage.room
 
-import android.util.Log
 import com.example.compnote.data.mappers.NoteListMapper
 import com.example.compnote.data.mappers.NoteMapper
 import com.example.compnote.data.storage.NoteStorage
@@ -10,8 +9,9 @@ import com.example.compnote.domain.models.Note
 import com.example.compnote.domain.models.Response
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class NoteStorageRoomImpl(
+class NoteStorageRoomImpl @Inject constructor(
     private val noteRoomDao: NoteRoomDao
 ) : NoteStorage {
 
@@ -25,7 +25,6 @@ class NoteStorageRoomImpl(
                         data = NoteListMapper().mapFromEntity(type = listNoteEntity)
                     )
                 )
-                Log.d("alpha33", "read all note + ${listNoteEntity.size}")
             }
         } catch (e: Exception) {
             emit(Response.Fail(e = e))
@@ -38,7 +37,6 @@ class NoteStorageRoomImpl(
         try {
             noteRoomDao.addNote(note = note)
             emit(Response.Success(data = true))
-            Log.d("alpha33", "add note +")
         } catch (e: Exception) {
             emit(Response.Fail(e = e))
         }
