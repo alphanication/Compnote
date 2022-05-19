@@ -18,7 +18,6 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val noteReadAllUseCase: NoteReadAllUseCase,
     private val noteDeleteByIdUseCase: NoteDeleteByIdUseCase,
-    private val noteAddUseCase: NoteAddUseCase,
     private val noteUpdateUseCase: NoteUpdateUseCase,
     private val noteGetByIdUseCase: NoteGetByIdUseCase
 ) : ViewModel() {
@@ -49,16 +48,6 @@ class MainViewModel @Inject constructor(
             }
         }
     }
-
-    fun addNote(note: Note): Flow<Boolean> = flow {
-        noteAddUseCase.execute(note = note).collect { response ->
-            when (response) {
-                is Response.Loading -> {}
-                is Response.Fail -> emit(false)
-                is Response.Success -> emit(response.data)
-            }
-        }
-    }.flowOn(Dispatchers.IO)
 
     fun updateNote(note: Note): Flow<Boolean> = flow {
         noteUpdateUseCase.execute(note = note).collect { response ->

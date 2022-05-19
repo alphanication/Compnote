@@ -19,13 +19,14 @@ import androidx.navigation.NavController
 import com.example.compnote.presentation.MainViewModel
 import com.example.compnote.domain.models.Note
 import com.example.compnote.presentation.navigation.NavRoute
+import com.example.compnote.presentation.screens.add.AddViewModel
 import com.example.compnote.presentation.util.Constants
 import com.example.compnote.presentation.util.Constants.Keys.ADD_NOTE
 import kotlinx.coroutines.launch
 
 @Composable
 fun AddScreen(navController: NavController) {
-    val mViewModel = hiltViewModel<MainViewModel>()
+    val mViewModel = hiltViewModel<AddViewModel>()
 
     val coroutineScope = rememberCoroutineScope()
 
