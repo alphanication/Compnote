@@ -6,8 +6,9 @@ import com.example.compnote.domain.models.Note
 import com.example.compnote.domain.models.Response
 import com.example.compnote.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class NoteRepositoryImpl(
+class NoteRepositoryImpl @Inject constructor(
     private val noteStorage: NoteStorage
 ) : NoteRepository {
     override suspend fun readAll(): Flow<Response<List<Note>>> {
