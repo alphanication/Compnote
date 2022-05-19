@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.compnote.presentation.MainViewModel
 import com.example.compnote.domain.models.Note
@@ -23,7 +24,8 @@ import com.example.compnote.presentation.util.Constants.Keys.ADD_NOTE
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddScreen(navController: NavController, viewModel: MainViewModel) {
+fun AddScreen(navController: NavController) {
+    val mViewModel = hiltViewModel<MainViewModel>()
 
     val coroutineScope = rememberCoroutineScope()
 
@@ -66,7 +68,7 @@ fun AddScreen(navController: NavController, viewModel: MainViewModel) {
                 enabled = isButtonEnabled,
                 onClick = {
                     coroutineScope.launch {
-                        viewModel.addNote(note = Note(title = title, subtitle = subtitle))
+                        mViewModel.addNote(note = Note(title = title, subtitle = subtitle))
                             .collect {
                                 if (it) navController.navigate(NavRoute.MainScreen.route)
                             }

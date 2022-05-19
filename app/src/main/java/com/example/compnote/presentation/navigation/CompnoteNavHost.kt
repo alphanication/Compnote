@@ -11,26 +11,23 @@ import com.example.compnote.presentation.screens.NoteScreen
 import com.example.compnote.presentation.util.Constants
 
 @Composable
-fun CompnoteNavHost(mViewModel: MainViewModel) {
+fun CompnoteNavHost() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = NavRoute.MainScreen.route) {
 
         composable(route = NavRoute.MainScreen.route) {
             MainScreen(
                 navController = navController,
-                viewModel = mViewModel
             )
         }
         composable(route = NavRoute.AddScreen.route) {
             AddScreen(
                 navController = navController,
-                viewModel = mViewModel
             )
         }
         composable(route = NavRoute.NoteScreen.route + "/{${Constants.Keys.NOTE_ID}}") { backStackEntry ->
             NoteScreen(
                 navController = navController,
-                viewModel = mViewModel,
                 noteId = backStackEntry.arguments?.getString(Constants.Keys.NOTE_ID)
             )
         }
