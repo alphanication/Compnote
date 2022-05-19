@@ -1,4 +1,4 @@
-package com.example.compnote.data.storage.room
+package com.example.compnote.data.storage.room.roomdb
 
 import androidx.room.*
 import com.example.compnote.data.storage.models.NoteEntity

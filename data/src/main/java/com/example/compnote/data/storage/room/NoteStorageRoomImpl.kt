@@ -5,11 +5,11 @@ import com.example.compnote.data.mappers.NoteListMapper
 import com.example.compnote.data.mappers.NoteMapper
 import com.example.compnote.data.storage.NoteStorage
 import com.example.compnote.data.storage.models.NoteEntity
+import com.example.compnote.data.storage.room.roomdb.NoteRoomDao
 import com.example.compnote.domain.models.Note
 import com.example.compnote.domain.models.Response
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 
 class NoteStorageRoomImpl(
     private val noteRoomDao: NoteRoomDao
