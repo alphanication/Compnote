@@ -1,4 +1,4 @@
-package com.example.compnote.presentation.screens
+package com.example.compnote.presentation.screens.note
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,17 +12,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.compnote.presentation.MainViewModel
 import com.example.compnote.domain.models.Note
+import com.example.compnote.presentation.MainViewModel
 import com.example.compnote.presentation.navigation.NavRoute
 import com.example.compnote.presentation.util.Constants
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun NoteScreen(navController: NavController,noteId: String?) {
+fun NoteScreen(navController: NavController, noteId: String?) {
 
-    val mViewModel = hiltViewModel<MainViewModel>()
+    val mViewModel = hiltViewModel<NoteViewModel>()
 
     val note = mViewModel.note.observeAsState(
         Note(
@@ -65,7 +65,7 @@ fun NoteScreen(navController: NavController,noteId: String?) {
                         onValueChange = {
                             title = it
                             isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
-                                        },
+                        },
                         label = { Text(text = Constants.Keys.TITLE) },
                         isError = title.isEmpty()
                     )
@@ -83,7 +83,13 @@ fun NoteScreen(navController: NavController,noteId: String?) {
                         enabled = isButtonEnabled,
                         onClick = {
                             coroutineScope.launch {
-                                mViewModel.updateNote(note = Note(id = note.id, title = title, subtitle = subtitle))
+                                mViewModel.updateNote(
+                                    note = Note(
+                                        id = note.id,
+                                        title = title,
+                                        subtitle = subtitle
+                                    )
+                                )
                                     .collect {
                                         if (it) navController.navigate(NavRoute.MainScreen.route)
                                     }

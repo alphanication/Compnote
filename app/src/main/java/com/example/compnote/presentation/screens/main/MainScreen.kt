@@ -1,4 +1,4 @@
-package com.example.compnote.presentation.screens
+package com.example.compnote.presentation.screens.main
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

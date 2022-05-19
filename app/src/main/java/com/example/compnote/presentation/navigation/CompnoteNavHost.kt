@@ -4,10 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.compnote.presentation.MainViewModel
-import com.example.compnote.presentation.screens.AddScreen
-import com.example.compnote.presentation.screens.MainScreen
-import com.example.compnote.presentation.screens.NoteScreen
+import com.example.compnote.presentation.screens.add.AddScreen
+import com.example.compnote.presentation.screens.main.MainScreen
+import com.example.compnote.presentation.screens.note.NoteScreen
 import com.example.compnote.presentation.util.Constants
 
 @Composable
