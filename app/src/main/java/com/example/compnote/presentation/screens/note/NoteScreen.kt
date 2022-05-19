@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.compnote.domain.models.Note
-import com.example.compnote.presentation.MainViewModel
 import com.example.compnote.presentation.navigation.NavRoute
 import com.example.compnote.presentation.util.Constants
 import kotlinx.coroutines.launch
