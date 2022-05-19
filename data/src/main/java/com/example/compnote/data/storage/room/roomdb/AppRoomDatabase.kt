@@ -1,4 +1,4 @@
-package com.example.compnote.data.storage.room
+package com.example.compnote.data.storage.room.roomdb
 
 import android.content.Context
 import androidx.room.Database
