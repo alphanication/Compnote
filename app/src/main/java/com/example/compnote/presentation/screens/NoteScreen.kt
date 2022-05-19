@@ -1,4 +1,4 @@
-package com.example.compnote.screens
+package com.example.compnote.presentation.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,10 +11,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.compnote.MainViewModel
+import com.example.compnote.presentation.MainViewModel
 import com.example.compnote.domain.models.Note
-import com.example.compnote.navigation.NavRoute
-import com.example.compnote.util.Constants
+import com.example.compnote.presentation.navigation.NavRoute
+import com.example.compnote.presentation.util.Constants
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)

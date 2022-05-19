@@ -1,6 +1,6 @@
-package com.example.compnote.navigation
+package com.example.compnote.presentation.navigation
 
-import com.example.compnote.util.Constants
+import com.example.compnote.presentation.util.Constants
 
 sealed class NavRoute(val route: String) {
     object MainScreen : NavRoute(route = Constants.Screens.MAIN_SCREEN)

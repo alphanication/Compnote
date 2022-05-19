@@ -1,4 +1,4 @@
-package com.example.compnote
+package com.example.compnote.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.compnote.domain.models.Note
 import com.example.compnote.domain.models.Response
 import com.example.compnote.domain.usecase.*
-import com.example.compnote.util.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
