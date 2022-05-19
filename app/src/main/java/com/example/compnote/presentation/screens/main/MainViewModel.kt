@@ -1,4 +1,4 @@
-package com.example.compnote.presentation
+package com.example.compnote.presentation.screens.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
