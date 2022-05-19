@@ -1,4 +1,4 @@
-package com.example.compnote.screens
+package com.example.compnote.presentation.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -19,9 +19,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.compnote.MainViewModel
+import com.example.compnote.presentation.MainViewModel
 import com.example.compnote.domain.models.Note
-import com.example.compnote.navigation.NavRoute
+import com.example.compnote.presentation.navigation.NavRoute
 
 @Composable
 fun MainScreen(navController: NavController, viewModel: MainViewModel) {

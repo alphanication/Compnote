@@ -1,4 +1,4 @@
-package com.example.compnote
+package com.example.compnote.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,8 +9,8 @@ import androidx.compose.material.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.compnote.navigation.CompnoteNavHost
-import com.example.compnote.ui.theme.CompnoteTheme
+import com.example.compnote.presentation.navigation.CompnoteNavHost
+import com.example.compnote.presentation.ui.theme.CompnoteTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

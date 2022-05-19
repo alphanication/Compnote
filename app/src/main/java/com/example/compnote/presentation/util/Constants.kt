@@ -1,4 +1,4 @@
-package com.example.compnote.util
+package com.example.compnote.presentation.util
 
 object Constants {
     object Keys {
