@@ -16,8 +16,8 @@ object DomainModule {
     }
 
     @Provides
-    fun provideNoteDeleteUseCase(noteRepository: NoteRepository): NoteDeleteUseCase {
-        return NoteDeleteUseCase(noteRepository = noteRepository)
+    fun provideNoteDeleteByIdUseCase(noteRepository: NoteRepository): NoteDeleteByIdUseCase {
+        return NoteDeleteByIdUseCase(noteRepository = noteRepository)
     }
 
     @Provides
