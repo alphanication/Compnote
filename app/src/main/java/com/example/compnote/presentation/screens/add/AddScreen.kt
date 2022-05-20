@@ -1,28 +1,23 @@
 package com.example.compnote.presentation.screens.add
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.material.icons.filled.Create
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.compnote.domain.models.Note
 import com.example.compnote.presentation.navigation.NavRoute
+import com.example.compnote.presentation.ui.theme.Purple500
 import com.example.compnote.presentation.util.Constants
-import com.example.compnote.presentation.util.Constants.Keys.ADD_NOTE
 import kotlinx.coroutines.launch
 
 @Composable
@@ -37,15 +32,18 @@ fun AddScreen(navController: NavController) {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
+                modifier = Modifier.padding(bottom = 15.dp, end = 15.dp),
                 onClick = {
-                    coroutineScope.launch {
-                        mViewModel.addNote(note = Note(title = title, subtitle = subtitle))
-                            .collect {
-                                if (it) navController.navigate(NavRoute.MainScreen.route)
-                            }
+                    if (title.isNotEmpty() and subtitle.isNotEmpty()) {
+                        coroutineScope.launch {
+                            mViewModel.addNote(note = Note(title = title, subtitle = subtitle))
+                                .collect {
+                                    if (it) navController.navigate(NavRoute.MainScreen.route)
+                                }
+                        }
                     }
                 },
-                backgroundColor = Color.Blue,
+                backgroundColor = MaterialTheme.colors.primary
             ) {
                 Icon(
                     imageVector = Icons.Filled.ArrowForward,
@@ -61,25 +59,35 @@ fun AddScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(
-                text = Constants.Keys.ADD_NEW_NOTE,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(8.dp)
-            )
+            Spacer(modifier = Modifier.padding(top = 15.dp))
 
             OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp)
+                    .padding(horizontal = 15.dp),
                 value = title,
                 onValueChange = { title = it },
-                label = { Text(text = Constants.Keys.NOTE_TITLE) },
-                isError = title.isEmpty()
+                label = { Text(text = Constants.Keys.TITLE) },
+                trailingIcon = {
+                    if (title.isEmpty()) Icon(Icons.Filled.Info, contentDescription = "error", tint = Color.Red)
+                },
+                isError = title.isEmpty(),
+                shape = RoundedCornerShape(15.dp)
             )
 
+            Spacer(modifier = Modifier.padding(top = 5.dp))
+
             OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(200.dp)
+                    .padding(start = 15.dp, end = 15.dp, bottom = 15.dp),
                 value = subtitle,
                 onValueChange = { subtitle = it },
-                label = { Text(text = Constants.Keys.NOTE_SUBTITLE) },
-                isError = subtitle.isEmpty()
+                label = { Text(text = Constants.Keys.SUBTITLE) },
+                isError = subtitle.isEmpty(),
+                shape = RoundedCornerShape(15.dp)
             )
         }
     }
