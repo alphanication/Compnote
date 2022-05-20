@@ -35,7 +35,7 @@ fun MainScreen(navController: NavController) {
                 onClick = {
                     navController.navigate(NavRoute.AddScreen.route)
                 },
-                backgroundColor = Color.Blue,
+                backgroundColor = MaterialTheme.colors.primary
             ) {
                 Icon(
                     imageVector = Icons.Filled.Add,
