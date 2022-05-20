@@ -21,16 +21,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             CompnoteTheme {
                 Scaffold(
-                    topBar = {
-                        TopAppBar(
-                            title = {
-                                Text(text = "Compnote")
-                            },
-                            backgroundColor = Color.Blue,
-                            contentColor = Color.White,
-                            elevation = 12.dp
-                        )
-                    },
                     content = {
                         Surface(
                             modifier = Modifier.fillMaxSize(),
