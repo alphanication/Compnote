@@ -29,6 +29,10 @@ fun MainScreen(navController: NavController) {
 
     val notes = mViewModel.allListNote.observeAsState(listOf()).value
 
+    LaunchedEffect(key1 = Unit, block = {
+        mViewModel.getAllNotes()
+    })
+
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
@@ -52,10 +56,6 @@ fun MainScreen(navController: NavController) {
             }
         }
     }
-
-    LaunchedEffect(key1 = Unit, block = {
-        mViewModel.getAllNotes()
-    })
 }
 
 @Composable
@@ -66,8 +66,7 @@ fun NoteItem(navController: NavController, note: Note) {
             .padding(vertical = 8.dp, horizontal = 24.dp)
             .clickable {
                 navController.navigate(NavRoute.NoteScreen.route + "/${note.id}")
-            },
-        elevation = 6.dp
+            }
     ) {
         Column(
             modifier = Modifier.padding(vertical = 8.dp),
@@ -76,9 +75,10 @@ fun NoteItem(navController: NavController, note: Note) {
             Text(
                 text = note.title,
                 fontSize = 24.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
             )
-            Text(text = note.subtitle)
+            Text(text = note.subtitle, color = Color.Black)
         }
     }
 }
