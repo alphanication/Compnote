@@ -85,15 +85,16 @@ fun NoteItem(navController: NavController, note: Note) {
                 text = note.title,
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
+                maxLines = 1
             )
 
             Spacer(modifier = Modifier.padding(top = 5.dp))
 
             Text(
+                modifier = Modifier.padding(horizontal = 15.dp),
                 text = note.subtitle,
                 fontSize = 18.sp,
-                maxLines = 7,
-                modifier = Modifier.padding(horizontal = 15.dp)
+                maxLines = 7
             )
 
             Spacer(modifier = Modifier.padding(bottom = 10.dp))

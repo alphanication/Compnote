@@ -1,5 +1,6 @@
 package com.example.compnote.presentation.screens.note
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -150,7 +151,8 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                     .heightIn(100.dp, 500.dp)
                     .padding(horizontal = 15.dp),
                 backgroundColor = MaterialTheme.colors.surface,
-                shape = RoundedCornerShape(25.dp)
+                shape = RoundedCornerShape(25.dp),
+                border = BorderStroke(2.dp, MaterialTheme.colors.primary)
             ) {
                 LazyColumn(
                     modifier = Modifier.padding(horizontal = 10.dp),
@@ -160,10 +162,11 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                         Spacer(modifier = Modifier.padding(top = 10.dp))
 
                         Text(
+                            modifier = Modifier.padding(horizontal = 5.dp),
                             text = note.title,
                             fontSize = 32.sp,
                             fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(horizontal = 5.dp)
+                            maxLines = 1
                         )
 
                         Spacer(modifier = Modifier.padding(top = 10.dp))
