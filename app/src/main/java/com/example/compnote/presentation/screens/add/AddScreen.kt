@@ -2,7 +2,6 @@ package com.example.compnote.presentation.screens.add
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
@@ -16,7 +15,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.compnote.domain.models.Note
 import com.example.compnote.presentation.navigation.NavRoute
-import com.example.compnote.presentation.ui.theme.Purple500
 import com.example.compnote.presentation.util.Constants
 import kotlinx.coroutines.launch
 
@@ -73,6 +71,7 @@ fun AddScreen(navController: NavController) {
                     if (title.isEmpty()) Icon(Icons.Filled.Info, contentDescription = "error", tint = Color.Red)
                 },
                 isError = title.isEmpty(),
+                colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(15.dp)
             )
 
@@ -87,6 +86,7 @@ fun AddScreen(navController: NavController) {
                 onValueChange = { subtitle = it },
                 label = { Text(text = Constants.Keys.SUBTITLE) },
                 isError = subtitle.isEmpty(),
+                colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(15.dp)
             )
         }

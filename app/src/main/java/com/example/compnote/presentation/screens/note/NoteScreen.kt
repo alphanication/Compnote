@@ -19,6 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.compnote.domain.models.Note
 import com.example.compnote.presentation.navigation.NavRoute
+import com.example.compnote.presentation.ui.theme.backgroundContentButton
 import com.example.compnote.presentation.util.Constants
 import kotlinx.coroutines.launch
 
@@ -105,10 +106,14 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                         },
                         label = { Text(text = Constants.Keys.TITLE) },
                         trailingIcon = {
-                            if (title.isEmpty()) Icon(Icons.Filled.Info, contentDescription = "error", tint = Color.Red)
+                            if (title.isEmpty()) Icon(
+                                Icons.Filled.Info,
+                                contentDescription = "error",
+                                tint = Color.Red
+                            )
                         },
                         isError = title.isEmpty(),
-                        colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = Color.White),
+                        colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = MaterialTheme.colors.surface),
                         shape = RoundedCornerShape(25.dp)
                     )
 
@@ -123,7 +128,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                         },
                         label = { Text(text = Constants.Keys.SUBTITLE) },
                         isError = subtitle.isEmpty(),
-                        colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = Color.White),
+                        colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = MaterialTheme.colors.surface),
                         shape = RoundedCornerShape(25.dp)
                     )
 
@@ -190,7 +195,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                         }
                     },
                     shape = RoundedCornerShape(15.dp),
-                    colors = ButtonDefaults.buttonColors(contentColor = Color.White)
+                    colors = ButtonDefaults.buttonColors(contentColor = backgroundContentButton)
                 ) {
                     Text(text = Constants.Keys.UPDATE)
                 }
@@ -206,7 +211,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                         }
                     },
                     shape = RoundedCornerShape(15.dp),
-                    colors = ButtonDefaults.buttonColors(contentColor = Color.White)
+                    colors = ButtonDefaults.buttonColors(contentColor = backgroundContentButton)
                 ) {
                     Text(text = Constants.Keys.DELETE)
                 }
