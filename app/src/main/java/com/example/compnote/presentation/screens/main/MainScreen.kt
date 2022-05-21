@@ -76,9 +76,8 @@ fun NoteItem(navController: NavController, note: Note) {
                 text = note.title,
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black
             )
-            Text(text = note.subtitle, color = Color.Black)
+            Text(text = note.subtitle)
         }
     }
 }
