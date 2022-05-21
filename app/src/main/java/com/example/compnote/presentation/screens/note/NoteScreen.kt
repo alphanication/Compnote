@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -72,15 +74,17 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                         Button(
                             enabled = isButtonEnabled,
                             onClick = {
-                                coroutineScope.launch {
-                                    mViewModel.updateNote(
-                                        note = Note(
-                                            id = note.id,
-                                            title = title,
-                                            subtitle = subtitle
-                                        )
-                                    ).collect {
-                                        if (it) bottomSheetState.hide()
+                                if (title.isNotEmpty() and subtitle.isNotEmpty()) {
+                                    coroutineScope.launch {
+                                        mViewModel.updateNote(
+                                            note = Note(
+                                                id = note.id,
+                                                title = title,
+                                                subtitle = subtitle
+                                            )
+                                        ).collect {
+                                            if (it) navController.navigate(NavRoute.MainScreen.route)
+                                        }
                                     }
                                 }
                             },
@@ -91,12 +95,16 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                     }
 
                     OutlinedTextField(
+                        modifier = Modifier.fillMaxWidth(),
                         value = title,
                         onValueChange = {
                             title = it
                             isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
                         },
                         label = { Text(text = Constants.Keys.TITLE) },
+                        trailingIcon = {
+                            if (title.isEmpty()) Icon(Icons.Filled.Info, contentDescription = "error", tint = Color.Red)
+                        },
                         isError = title.isEmpty(),
                         shape = RoundedCornerShape(25.dp)
                     )
@@ -104,6 +112,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                     Spacer(modifier = Modifier.padding(top = 5.dp))
 
                     OutlinedTextField(
+                        modifier = Modifier.fillMaxWidth(),
                         value = subtitle,
                         onValueChange = {
                             subtitle = it
