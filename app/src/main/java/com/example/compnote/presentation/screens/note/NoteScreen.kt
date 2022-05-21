@@ -1,5 +1,6 @@
 package com.example.compnote.presentation.screens.note
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -48,7 +49,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
 
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
-        sheetBackgroundColor = Color(0xFFBDBFBF),
+        sheetBackgroundColor = MaterialTheme.colors.background,
         sheetElevation = 5.dp,
         sheetShape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
         sheetContent = {
@@ -56,6 +57,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
+                        .background(MaterialTheme.colors.background)
                         .padding(25.dp)
                 ) {
                     Row(
@@ -106,6 +108,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                             if (title.isEmpty()) Icon(Icons.Filled.Info, contentDescription = "error", tint = Color.Red)
                         },
                         isError = title.isEmpty(),
+                        colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = Color.White),
                         shape = RoundedCornerShape(25.dp)
                     )
 
@@ -120,6 +123,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                         },
                         label = { Text(text = Constants.Keys.SUBTITLE) },
                         isError = subtitle.isEmpty(),
+                        colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = Color.White),
                         shape = RoundedCornerShape(25.dp)
                     )
 
@@ -140,7 +144,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                     .fillMaxWidth()
                     .heightIn(100.dp, 500.dp)
                     .padding(horizontal = 15.dp),
-                backgroundColor = Color(0xFFBDBFBF),
+                backgroundColor = MaterialTheme.colors.surface,
                 shape = RoundedCornerShape(25.dp)
             ) {
                 LazyColumn(
@@ -185,7 +189,8 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                             bottomSheetState.animateTo(ModalBottomSheetValue.Expanded)
                         }
                     },
-                    shape = RoundedCornerShape(15.dp)
+                    shape = RoundedCornerShape(15.dp),
+                    colors = ButtonDefaults.buttonColors(contentColor = Color.White)
                 ) {
                     Text(text = Constants.Keys.UPDATE)
                 }
@@ -200,7 +205,8 @@ fun NoteScreen(navController: NavController, noteId: String?) {
 
                         }
                     },
-                    shape = RoundedCornerShape(15.dp)
+                    shape = RoundedCornerShape(15.dp),
+                    colors = ButtonDefaults.buttonColors(contentColor = Color.White)
                 ) {
                     Text(text = Constants.Keys.DELETE)
                 }
