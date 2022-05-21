@@ -50,7 +50,7 @@ fun AddScreen(navController: NavController) {
                 )
             }
         },
-        modifier = Modifier.padding(bottom = 8.dp, end = 8.dp)
+        modifier = Modifier.padding(bottom = 8.dp)
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -62,7 +62,6 @@ fun AddScreen(navController: NavController) {
             OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(60.dp)
                     .padding(horizontal = 15.dp),
                 value = title,
                 onValueChange = { title = it },
@@ -70,6 +69,7 @@ fun AddScreen(navController: NavController) {
                 trailingIcon = {
                     if (title.isEmpty()) Icon(Icons.Filled.Info, contentDescription = "error", tint = Color.Red)
                 },
+                maxLines = 1,
                 isError = title.isEmpty(),
                 colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(15.dp)
