@@ -56,12 +56,39 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                         .fillMaxSize()
                         .padding(25.dp)
                 ) {
-                    Text(
-                        text = Constants.Keys.EDIT_NOTE,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
+                    Row(
+                        modifier = Modifier
+                            .heightIn(0.dp, 100.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = Constants.Keys.EDIT_NOTE,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                        )
+
+                        Button(
+                            enabled = isButtonEnabled,
+                            onClick = {
+                                coroutineScope.launch {
+                                    mViewModel.updateNote(
+                                        note = Note(
+                                            id = note.id,
+                                            title = title,
+                                            subtitle = subtitle
+                                        )
+                                    ).collect {
+                                        if (it) bottomSheetState.hide()
+                                    }
+                                }
+                            },
+                            shape = RoundedCornerShape(15.dp)
+                        ) {
+                            Text(text = Constants.Keys.UPDATE_NOTE)
+                        }
+                    }
 
                     OutlinedTextField(
                         value = title,
@@ -87,28 +114,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                         shape = RoundedCornerShape(25.dp)
                     )
 
-                    Spacer(modifier = Modifier.padding(top = 15.dp))
-
-                    Button(
-                        enabled = isButtonEnabled,
-                        onClick = {
-                            coroutineScope.launch {
-                                mViewModel.updateNote(
-                                    note = Note(
-                                        id = note.id,
-                                        title = title,
-                                        subtitle = subtitle
-                                    )
-                                )
-                                    .collect {
-                                        if (it) bottomSheetState.hide()
-                                    }
-                            }
-                        },
-                        shape = RoundedCornerShape(15.dp)
-                    ) {
-                        Text(text = Constants.Keys.UPDATE_NOTE)
-                    }
+                    Spacer(modifier = Modifier.padding(bottom = 15.dp))
                 }
             }
         }
