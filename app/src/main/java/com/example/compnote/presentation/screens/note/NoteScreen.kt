@@ -1,12 +1,14 @@
 package com.example.compnote.presentation.screens.note
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -44,6 +46,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
 
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
+        sheetBackgroundColor = Color(0xFFBDBFBF),
         sheetElevation = 5.dp,
         sheetShape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
         sheetContent = {
@@ -51,7 +54,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(32.dp)
+                        .padding(25.dp)
                 ) {
                     Text(
                         text = Constants.Keys.EDIT_NOTE,
@@ -59,6 +62,7 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(vertical = 8.dp)
                     )
+
                     OutlinedTextField(
                         value = title,
                         onValueChange = {
@@ -66,8 +70,12 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                             isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
                         },
                         label = { Text(text = Constants.Keys.TITLE) },
-                        isError = title.isEmpty()
+                        isError = title.isEmpty(),
+                        shape = RoundedCornerShape(25.dp)
                     )
+
+                    Spacer(modifier = Modifier.padding(top = 5.dp))
+
                     OutlinedTextField(
                         value = subtitle,
                         onValueChange = {
@@ -75,10 +83,13 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                             isButtonEnabled = title.isNotEmpty() && subtitle.isNotEmpty()
                         },
                         label = { Text(text = Constants.Keys.SUBTITLE) },
-                        isError = subtitle.isEmpty()
+                        isError = subtitle.isEmpty(),
+                        shape = RoundedCornerShape(25.dp)
                     )
+
+                    Spacer(modifier = Modifier.padding(top = 15.dp))
+
                     Button(
-                        modifier = Modifier.padding(top = 16.dp),
                         enabled = isButtonEnabled,
                         onClick = {
                             coroutineScope.launch {
@@ -90,10 +101,11 @@ fun NoteScreen(navController: NavController, noteId: String?) {
                                     )
                                 )
                                     .collect {
-                                        if (it) navController.navigate(NavRoute.MainScreen.route)
+                                        if (it) bottomSheetState.hide()
                                     }
                             }
-                        }
+                        },
+                        shape = RoundedCornerShape(15.dp)
                     ) {
                         Text(text = Constants.Keys.UPDATE_NOTE)
                     }
@@ -101,79 +113,81 @@ fun NoteScreen(navController: NavController, noteId: String?) {
             }
         }
     ) {
-        Scaffold(
-            modifier = Modifier.fillMaxSize()
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+            Spacer(modifier = Modifier.padding(top = 20.dp))
+
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(100.dp, 500.dp)
+                    .padding(horizontal = 15.dp),
+                backgroundColor = Color(0xFFBDBFBF),
+                shape = RoundedCornerShape(25.dp)
             ) {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(32.dp)
+                LazyColumn(
+                    modifier = Modifier.padding(horizontal = 10.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Column(
-                        modifier = Modifier.padding(vertical = 8.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
+                    item {
+                        Spacer(modifier = Modifier.padding(top = 10.dp))
+
                         Text(
                             text = note.title,
                             fontSize = 32.sp,
                             fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(top = 16.dp)
+                            modifier = Modifier.padding(horizontal = 5.dp)
                         )
+
+                        Spacer(modifier = Modifier.padding(top = 10.dp))
+
                         Text(
                             text = note.subtitle,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Light,
-                            modifier = Modifier.padding(top = 8.dp)
+                            modifier = Modifier.padding(horizontal = 5.dp)
                         )
-                    }
-                }
-                Row(
-                    modifier = Modifier
-                        .padding(32.dp)
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceAround
-                ) {
-                    Button(
-                        onClick = {
-                            coroutineScope.launch {
-                                title = note.title
-                                subtitle = note.subtitle
-                                bottomSheetState.show()
-                            }
-                        }
-                    ) {
-                        Text(text = Constants.Keys.UPDATE)
-                    }
-                    Button(
-                        onClick = {
-                            coroutineScope.launch {
-                                mViewModel.deleteNoteById(id = note.id)
-                                    .collect {
-                                        if (it) navController.navigate(NavRoute.MainScreen.route)
-                                    }
 
-                            }
-                        }
-                    ) {
-                        Text(text = Constants.Keys.DELETE)
+                        Spacer(modifier = Modifier.padding(top = 10.dp))
                     }
                 }
+            }
+            Row(
+                modifier = Modifier
+                    .padding(25.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceAround
+            ) {
                 Button(
-                    modifier = Modifier
-                        .padding(top = 16.dp)
-                        .padding(horizontal = 32.dp)
-                        .fillMaxWidth(),
                     onClick = {
-                        navController.navigate(NavRoute.MainScreen.route)
-                    }
+                        coroutineScope.launch {
+                            title = note.title
+                            subtitle = note.subtitle
+                            bottomSheetState.animateTo(ModalBottomSheetValue.Expanded)
+                        }
+                    },
+                    shape = RoundedCornerShape(15.dp)
                 ) {
-                    Text(text = Constants.Keys.BACK)
+                    Text(text = Constants.Keys.UPDATE)
+                }
+
+                Button(
+                    onClick = {
+                        coroutineScope.launch {
+                            mViewModel.deleteNoteById(id = note.id)
+                                .collect {
+                                    if (it) navController.navigate(NavRoute.MainScreen.route)
+                                }
+
+                        }
+                    },
+                    shape = RoundedCornerShape(15.dp)
+                ) {
+                    Text(text = Constants.Keys.DELETE)
                 }
             }
         }
