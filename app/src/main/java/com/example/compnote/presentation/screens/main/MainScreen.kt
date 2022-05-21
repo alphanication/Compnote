@@ -2,10 +2,7 @@ package com.example.compnote.presentation.screens.main
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CutCornerShape
@@ -54,9 +51,10 @@ fun MainScreen(navController: NavController) {
                 )
             }
         },
-        modifier = Modifier.padding(bottom = 8.dp, end = 8.dp)
     ) {
-        LazyColumn {
+        LazyColumn(
+            modifier = Modifier.padding(horizontal = 15.dp, vertical = 15.dp)
+        ) {
             items(notes) { note ->
                 NoteItem(navController = navController, note = note)
             }
@@ -69,7 +67,7 @@ fun NoteItem(navController: NavController, note: Note) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 24.dp)
+            .padding(bottom = 15.dp)
             .clickable {
                 navController.navigate(NavRoute.NoteScreen.route + "/${note.id}")
             },
@@ -77,17 +75,26 @@ fun NoteItem(navController: NavController, note: Note) {
         border = BorderStroke(2.dp, MaterialTheme.colors.primary)
     ) {
         Column(
-            modifier = Modifier.padding(vertical = 8.dp),
+            modifier = Modifier
+                .heightIn(0.dp, 200.dp)
+                .padding(vertical = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                modifier = Modifier.padding(horizontal = 10.dp),
+                modifier = Modifier.padding(horizontal = 15.dp),
                 text = note.title,
-                fontSize = 24.sp,
+                fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
             )
 
-            Text(text = note.subtitle, modifier = Modifier.padding(horizontal = 10.dp))
+            Spacer(modifier = Modifier.padding(top = 5.dp))
+
+            Text(
+                text = note.subtitle,
+                fontSize = 18.sp,
+                maxLines = 7,
+                modifier = Modifier.padding(horizontal = 15.dp)
+            )
 
             Spacer(modifier = Modifier.padding(bottom = 10.dp))
         }
