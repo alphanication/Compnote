@@ -79,4 +79,20 @@ class NoteStorageRoomImpl @Inject constructor(
             emit(Response.Fail(e = e))
         }
     }
+
+    override suspend fun searchByTitle(title: String): Flow<Response<List<Note>>> = flow {
+        emit(Response.Loading())
+
+        try {
+            noteRoomDao.searchByTitle(title = title).collect { listNoteEntity ->
+                emit(
+                    Response.Success(
+                        data = NoteListMapper().mapFromEntity(type = listNoteEntity)
+                    )
+                )
+            }
+        } catch (e: Exception) {
+            emit(Response.Fail(e = e))
+        }
+    }
 }
