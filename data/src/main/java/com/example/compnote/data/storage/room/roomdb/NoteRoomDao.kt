@@ -10,7 +10,10 @@ interface NoteRoomDao {
     fun getAllNotes(): Flow<List<NoteEntity>>
 
     @Query("SELECT * FROM notes_table WHERE id = :id")
-    fun getNoteById(id: Int) : Flow<NoteEntity>
+    fun getNoteById(id: Int): Flow<NoteEntity>
+
+    @Query("SELECT * FROM notes_table WHERE title LIKE '%' || :title || '%'")
+    fun searchByTitle(title: String): Flow<List<NoteEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addNote(note: NoteEntity)

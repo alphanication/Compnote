@@ -34,4 +34,8 @@ class NoteRepositoryImpl @Inject constructor(
     override suspend fun getNoteById(id: Int): Flow<Response<Note>> {
         return noteStorage.getNoteById(id = id)
     }
+
+    override suspend fun searchByTitle(title: String): Flow<Response<List<Note>>> {
+        return noteStorage.searchByTitle(title = title)
+    }
 }
