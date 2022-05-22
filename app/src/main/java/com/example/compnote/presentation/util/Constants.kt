@@ -12,6 +12,7 @@ object Constants {
         const val EMPTY = ""
         const val UPDATE_NOTE = "UPDATE NOTE"
         const val NOTE_ID = "note_id"
+        const val SEARCH = "Search..."
     }
 
     object Screens {
