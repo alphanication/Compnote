@@ -14,4 +14,6 @@ interface NoteRepository {
     suspend fun deleteNoteById(id: Int): Flow<Response<Boolean>>
 
     suspend fun getNoteById(id: Int): Flow<Response<Note>>
+
+    suspend fun searchByTitle(title: String) : Flow<Response<List<Note>>>
 }
