@@ -1,5 +1,7 @@
 package com.example.compnote.presentation.screens.note
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,9 +12,6 @@ import com.example.compnote.domain.usecase.NoteGetByIdUseCase
 import com.example.compnote.domain.usecase.NoteUpdateUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,35 +24,54 @@ class NoteViewModel @Inject constructor(
 
     val note = MutableLiveData<Note>()
 
+    private val _resultUpdateNote = MutableLiveData<Boolean>()
+    val resultUpdateNote: LiveData<Boolean> = _resultUpdateNote
+
+    private val _resultDeleteNote = MutableLiveData<Boolean>()
+    val resultDeleteNote: LiveData<Boolean> = _resultDeleteNote
+
     fun getNoteById(id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             noteGetByIdUseCase.execute(id = id).collect { response ->
                 when (response) {
                     is Response.Loading -> {}
                     is Response.Fail -> {}
-                    is Response.Success -> this@NoteViewModel.note.postValue(response.data)
+                    is Response.Success -> {
+                        Log.d("alpha33", "getNoteById: ${response.data.title}")
+                        this@NoteViewModel.note.postValue(response.data)
+                    }
                 }
             }
         }
     }
 
-    fun updateNote(note: Note): Flow<Boolean> = flow {
-        noteUpdateUseCase.execute(note = note).collect { response ->
-            when (response) {
-                is Response.Loading -> {}
-                is Response.Fail -> emit(false)
-                is Response.Success -> emit(response.data)
+    fun updateNote(note: Note) {
+        viewModelScope.launch(Dispatchers.IO) {
+            noteUpdateUseCase.execute(note = note).collect { response ->
+                when (response) {
+                    is Response.Loading -> {}
+                    is Response.Fail -> _resultUpdateNote.postValue(false)
+                    is Response.Success -> _resultUpdateNote.postValue(true)
+                }
             }
         }
-    }.flowOn(Dispatchers.IO)
+    }
 
-    fun deleteNoteById(id: Int): Flow<Boolean> = flow<Boolean> {
-        noteDeleteByIdUseCase.execute(id = id).collect { response ->
-            when (response) {
-                is Response.Loading -> {}
-                is Response.Fail -> emit(false)
-                is Response.Success -> emit(response.data)
+    fun deleteNoteById(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            noteDeleteByIdUseCase.execute(id = id).collect { response ->
+                when (response) {
+                    is Response.Loading -> {}
+                    is Response.Fail -> {
+                        Log.d("alpha33", "deleteNoteById fail: ${response.e}")
+                        _resultDeleteNote.postValue(false)
+                    }
+                    is Response.Success -> {
+                        Log.d("alpha33", "deleteNoteById success: ${response.data}")
+                        _resultDeleteNote.postValue(true)
+                    }
+                }
             }
         }
-    }.flowOn(Dispatchers.IO)
+    }
 }

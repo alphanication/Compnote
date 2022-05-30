@@ -7,6 +7,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,7 +23,11 @@ import kotlinx.coroutines.launch
 fun AddScreen(navController: NavController) {
     val mViewModel = hiltViewModel<AddViewModel>()
 
-    val coroutineScope = rememberCoroutineScope()
+    val addNoteResult = mViewModel.addNoteResult.observeAsState(false).value
+
+    LaunchedEffect(key1 = addNoteResult, block = {
+        if (addNoteResult) navController.navigate(NavRoute.MainScreen.route)
+    })
 
     var title by remember { mutableStateOf("") }
     var subtitle by remember { mutableStateOf("") }
@@ -33,12 +38,7 @@ fun AddScreen(navController: NavController) {
                 modifier = Modifier.padding(bottom = 15.dp, end = 15.dp),
                 onClick = {
                     if (title.isNotEmpty() and subtitle.isNotEmpty()) {
-                        coroutineScope.launch {
-                            mViewModel.addNote(note = Note(title = title, subtitle = subtitle))
-                                .collect {
-                                    if (it) navController.navigate(NavRoute.MainScreen.route)
-                                }
-                        }
+                        mViewModel.addNote(note = Note(title = title, subtitle = subtitle))
                     }
                 },
                 backgroundColor = MaterialTheme.colors.primary
@@ -67,7 +67,11 @@ fun AddScreen(navController: NavController) {
                 onValueChange = { title = it },
                 label = { Text(text = Constants.Keys.TITLE) },
                 trailingIcon = {
-                    if (title.isEmpty()) Icon(Icons.Filled.Info, contentDescription = "error", tint = Color.Red)
+                    if (title.isEmpty()) Icon(
+                        Icons.Filled.Info,
+                        contentDescription = "error",
+                        tint = Color.Red
+                    )
                 },
                 maxLines = 1,
                 isError = title.isEmpty(),
