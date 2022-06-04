@@ -28,6 +28,7 @@ You can see the application in action on youtube video hosting at the link: http
 * [Jetpack Compose](https://developer.android.com/jetpack/compose) - Android's modern toolkit for building native UI.
 * [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) - Clean architecture in Android.
 * [MVVM](https://developer.android.com/jetpack/docs/guide) - Architectural pattern.
+* [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) - Build data objects that notify views when the underlying database changes.
 * [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - Standard library to incorporate Dagger dependency injection into an Android application.
 * [Navigation Compose](https://developer.android.com/jetpack/compose/navigation).
 * [Room](https://developer.android.com/jetpack/androidx/releases/room) - The Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
