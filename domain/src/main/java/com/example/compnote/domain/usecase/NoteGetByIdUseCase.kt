@@ -6,7 +6,7 @@ import com.example.compnote.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.Flow
 
 class NoteGetByIdUseCase(private val noteRepository: NoteRepository) {
-    suspend fun execute(id: Int) : Flow<Response<Note>> {
+    suspend fun execute(id: Int): Flow<Response<Note>> {
         return noteRepository.getNoteById(id = id)
     }
 }

@@ -6,7 +6,7 @@ import com.example.compnote.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.Flow
 
 class NoteSearchByTitleUseCase(private val noteRepository: NoteRepository) {
-    suspend fun execute(title: String) : Flow<Response<List<Note>>> {
+    suspend fun execute(title: String): Flow<Response<List<Note>>> {
         return noteRepository.searchByTitle(title = title)
     }
 }

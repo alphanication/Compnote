@@ -31,12 +31,12 @@ object DomainModule {
     }
 
     @Provides
-    fun provideNoteGetByIdUseCase(noteRepository: NoteRepository) : NoteGetByIdUseCase {
+    fun provideNoteGetByIdUseCase(noteRepository: NoteRepository): NoteGetByIdUseCase {
         return NoteGetByIdUseCase(noteRepository = noteRepository)
     }
 
     @Provides
-    fun provideNoteSearchByTitleUseCase(noteRepository: NoteRepository) : NoteSearchByTitleUseCase {
+    fun provideNoteSearchByTitleUseCase(noteRepository: NoteRepository): NoteSearchByTitleUseCase {
         return NoteSearchByTitleUseCase(noteRepository = noteRepository)
     }
 }
