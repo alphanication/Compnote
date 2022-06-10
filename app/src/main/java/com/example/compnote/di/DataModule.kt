@@ -2,8 +2,8 @@ package com.example.compnote.di
 
 import com.example.compnote.data.repository.NoteRepositoryImpl
 import com.example.compnote.data.storage.NoteStorage
-import com.example.compnote.data.storage.room.roomdb.NoteRoomDao
 import com.example.compnote.data.storage.room.NoteStorageRoomImpl
+import com.example.compnote.data.storage.room.roomdb.NoteRoomDao
 import com.example.compnote.domain.repository.NoteRepository
 import dagger.Module
 import dagger.Provides

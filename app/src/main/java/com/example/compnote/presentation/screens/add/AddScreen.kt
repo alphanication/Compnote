@@ -17,7 +17,6 @@ import androidx.navigation.NavController
 import com.example.compnote.domain.models.Note
 import com.example.compnote.presentation.navigation.NavRoute
 import com.example.compnote.presentation.util.Constants
-import kotlinx.coroutines.launch
 
 @Composable
 fun AddScreen(navController: NavController) {

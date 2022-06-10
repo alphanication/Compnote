@@ -12,10 +12,10 @@
         android:theme="@style/Theme.Compnote">
         <activity
             android:name=".presentation.MainActivity"
-            android:windowSoftInputMode="adjustResize"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Compnote">
+            android:theme="@style/Theme.Compnote"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

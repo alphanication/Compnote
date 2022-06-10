@@ -20,7 +20,7 @@ class NoteViewModel @Inject constructor(
     private val noteDeleteByIdUseCase: NoteDeleteByIdUseCase,
     private val noteUpdateUseCase: NoteUpdateUseCase,
     private val noteGetByIdUseCase: NoteGetByIdUseCase
-): ViewModel() {
+) : ViewModel() {
 
     val note = MutableLiveData<Note>()
 
