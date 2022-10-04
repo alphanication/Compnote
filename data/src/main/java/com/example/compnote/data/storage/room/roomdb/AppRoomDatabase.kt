@@ -23,7 +23,7 @@ abstract class AppRoomDatabase : RoomDatabase() {
                 dbInstance = Room.databaseBuilder(
                     context,
                     AppRoomDatabase::class.java,
-                    ConstantsStorage.Keys.NOTES_DATABASE
+                    ConstantsStorage.KeysRoomNotes.NOTES_DATABASE
                 ).build()
             }
 
