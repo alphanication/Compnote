@@ -1,10 +1,10 @@
-package com.example.compnote.data.storage.room
+package com.example.compnote.data.data_source.room
 
 import com.example.compnote.data.mappers.NoteListMapper
 import com.example.compnote.data.mappers.NoteMapper
-import com.example.compnote.data.storage.NoteStorage
-import com.example.compnote.data.storage.models.NoteEntity
-import com.example.compnote.data.storage.room.roomdb.NoteRoomDao
+import com.example.compnote.data.data_source.NoteDataSource
+import com.example.compnote.data.data_source.models.NoteEntity
+import com.example.compnote.data.data_source.room.roomdb.NoteRoomDao
 import com.example.compnote.domain.models.Note
 import com.example.compnote.domain.models.Response
 import kotlinx.coroutines.cancel
@@ -14,9 +14,9 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class NoteStorageRoomImpl @Inject constructor(
+class NoteDataSourceRoomImpl @Inject constructor(
     private val noteRoomDao: NoteRoomDao
-) : NoteStorage {
+) : NoteDataSource {
 
     override suspend fun readAll(): Flow<Response<List<Note>>> = callbackFlow {
         trySend(Response.Loading())

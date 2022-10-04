@@ -1,9 +1,9 @@
 package com.example.compnote.di
 
 import com.example.compnote.data.repository.NoteRepositoryImpl
-import com.example.compnote.data.storage.NoteStorage
-import com.example.compnote.data.storage.room.NoteStorageRoomImpl
-import com.example.compnote.data.storage.room.roomdb.NoteRoomDao
+import com.example.compnote.data.data_source.NoteDataSource
+import com.example.compnote.data.data_source.room.NoteDataSourceRoomImpl
+import com.example.compnote.data.data_source.room.roomdb.NoteRoomDao
 import com.example.compnote.domain.repository.NoteRepository
 import dagger.Module
 import dagger.Provides
@@ -17,13 +17,13 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun provideNoteStorage(noteRoomDao: NoteRoomDao): NoteStorage {
-        return NoteStorageRoomImpl(noteRoomDao = noteRoomDao)
+    fun provideNoteStorage(noteRoomDao: NoteRoomDao): NoteDataSource {
+        return NoteDataSourceRoomImpl(noteRoomDao = noteRoomDao)
     }
 
     @Provides
     @Singleton
-    fun provideNoteRepository(noteStorage: NoteStorage): NoteRepository {
+    fun provideNoteRepository(noteStorage: NoteDataSource): NoteRepository {
         return NoteRepositoryImpl(noteStorage = noteStorage)
     }
 }

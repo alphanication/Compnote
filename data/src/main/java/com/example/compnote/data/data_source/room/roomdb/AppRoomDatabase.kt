@@ -1,11 +1,11 @@
-package com.example.compnote.data.storage.room.roomdb
+package com.example.compnote.data.data_source.room.roomdb
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.compnote.data.storage.models.NoteEntity
-import com.example.compnote.data.storage.util.ConstantsStorage
+import com.example.compnote.data.data_source.models.NoteEntity
+import com.example.compnote.data.data_source.util.ConstantsStorage
 
 @Database(
     entities = [NoteEntity::class],

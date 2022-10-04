@@ -1,4 +1,4 @@
-package com.example.compnote.data.storage.util
+package com.example.compnote.data.data_source.util
 
 object ConstantsStorage {
 

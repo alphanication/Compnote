@@ -1,7 +1,7 @@
 package com.example.compnote.data.repository
 
 import com.example.compnote.data.mappers.NoteMapper
-import com.example.compnote.data.storage.NoteStorage
+import com.example.compnote.data.data_source.NoteDataSource
 import com.example.compnote.domain.models.Note
 import com.example.compnote.domain.models.Response
 import com.example.compnote.domain.repository.NoteRepository
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class NoteRepositoryImpl @Inject constructor(
-    private val noteStorage: NoteStorage
+    private val noteStorage: NoteDataSource
 ) : NoteRepository {
 
     override suspend fun readAll(): Flow<Response<List<Note>>> =
