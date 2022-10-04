@@ -1,8 +1,10 @@
 package com.example.compnote.di
 
 import android.content.Context
+import androidx.room.Room
 import com.example.compnote.data.data_source.room.roomdb.AppRoomDatabase
 import com.example.compnote.data.data_source.room.roomdb.NoteRoomDao
+import com.example.compnote.data.data_source.util.ConstantsStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +20,12 @@ class RoomModule {
     @Provides
     fun provideAppRoomDatabase(
         @ApplicationContext appContext: Context
-    ): AppRoomDatabase = AppRoomDatabase.getAppDB(appContext)
+    ): AppRoomDatabase =
+        Room.databaseBuilder(
+            appContext,
+            AppRoomDatabase::class.java,
+            ConstantsStorage.KeysRoomNotes.NOTES_DATABASE
+        ).build()
 
     @Singleton
     @Provides
