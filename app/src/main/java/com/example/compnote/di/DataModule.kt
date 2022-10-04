@@ -17,13 +17,11 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun provideNoteStorage(noteRoomDao: NoteRoomDao): NoteDataSource {
-        return NoteDataSourceRoomImpl(noteRoomDao = noteRoomDao)
-    }
+    fun provideNoteDataSource(noteRoomDao: NoteRoomDao): NoteDataSource =
+        NoteDataSourceRoomImpl(noteRoomDao)
 
     @Provides
     @Singleton
-    fun provideNoteRepository(noteStorage: NoteDataSource): NoteRepository {
-        return NoteRepositoryImpl(noteStorage = noteStorage)
-    }
+    fun provideNoteRepository(noteStorage: NoteDataSource): NoteRepository =
+        NoteRepositoryImpl(noteStorage)
 }

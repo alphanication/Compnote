@@ -10,33 +10,28 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object DomainModule {
-    @Provides
-    fun provideNoteAddUseCase(noteRepository: NoteRepository): NoteAddUseCase {
-        return NoteAddUseCase(noteRepository = noteRepository)
-    }
 
     @Provides
-    fun provideNoteDeleteByIdUseCase(noteRepository: NoteRepository): NoteDeleteByIdUseCase {
-        return NoteDeleteByIdUseCase(noteRepository = noteRepository)
-    }
+    fun provideNoteAddUseCase(noteRepository: NoteRepository): NoteAddUseCase =
+        NoteAddUseCase(noteRepository)
 
     @Provides
-    fun provideNoteReadAllUseCase(noteRepository: NoteRepository): NoteReadAllUseCase {
-        return NoteReadAllUseCase(noteRepository = noteRepository)
-    }
+    fun provideNoteDeleteByIdUseCase(noteRepository: NoteRepository): NoteDeleteByIdUseCase =
+        NoteDeleteByIdUseCase(noteRepository)
 
     @Provides
-    fun provideNoteUpdateUseCase(noteRepository: NoteRepository): NoteUpdateUseCase {
-        return NoteUpdateUseCase(noteRepository = noteRepository)
-    }
+    fun provideNoteReadAllUseCase(noteRepository: NoteRepository): NoteReadAllUseCase =
+        NoteReadAllUseCase(noteRepository)
 
     @Provides
-    fun provideNoteGetByIdUseCase(noteRepository: NoteRepository): NoteGetByIdUseCase {
-        return NoteGetByIdUseCase(noteRepository = noteRepository)
-    }
+    fun provideNoteUpdateUseCase(noteRepository: NoteRepository): NoteUpdateUseCase =
+        NoteUpdateUseCase(noteRepository)
 
     @Provides
-    fun provideNoteSearchByTitleUseCase(noteRepository: NoteRepository): NoteSearchByTitleUseCase {
-        return NoteSearchByTitleUseCase(noteRepository = noteRepository)
-    }
+    fun provideNoteGetByIdUseCase(noteRepository: NoteRepository): NoteGetByIdUseCase =
+        NoteGetByIdUseCase(noteRepository)
+
+    @Provides
+    fun provideNoteSearchByTitleUseCase(noteRepository: NoteRepository): NoteSearchByTitleUseCase =
+        NoteSearchByTitleUseCase(noteRepository)
 }

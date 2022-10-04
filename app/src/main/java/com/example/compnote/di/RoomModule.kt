@@ -18,13 +18,10 @@ class RoomModule {
     @Provides
     fun provideAppRoomDatabase(
         @ApplicationContext appContext: Context
-    ): AppRoomDatabase {
-        return AppRoomDatabase.getAppDB(context = appContext)
-    }
+    ): AppRoomDatabase = AppRoomDatabase.getAppDB(appContext)
 
     @Singleton
     @Provides
-    fun provideDatabaseNoteRoomDao(roomDatabase: AppRoomDatabase): NoteRoomDao {
-        return roomDatabase.getNoteDao()
-    }
+    fun provideDatabaseNoteRoomDao(roomDatabase: AppRoomDatabase): NoteRoomDao =
+        roomDatabase.getNoteDao()
 }
