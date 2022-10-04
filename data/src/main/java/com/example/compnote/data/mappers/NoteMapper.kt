@@ -5,11 +5,17 @@ import com.example.compnote.data.utils.BaseMapper
 import com.example.compnote.domain.models.Note
 
 class NoteMapper : BaseMapper<NoteEntity, Note> {
-    override fun mapFromEntity(type: NoteEntity): Note {
-        return Note(id = type.id, title = type.title, subtitle = type.subtitle)
-    }
+    override fun mapFromEntity(type: NoteEntity): Note =
+        Note(
+            id = type.id,
+            title = type.title,
+            subtitle = type.subtitle
+        )
 
-    override fun mapToEntity(type: Note): NoteEntity {
-        return NoteEntity(id = type.id, title = type.title, subtitle = type.subtitle)
-    }
+    override fun mapToEntity(type: Note): NoteEntity =
+        NoteEntity(
+            id = type.id,
+            title = type.title,
+            subtitle = type.subtitle
+        )
 }
