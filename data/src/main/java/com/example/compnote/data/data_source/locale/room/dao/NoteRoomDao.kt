@@ -1,7 +1,7 @@
-package com.example.compnote.data.data_source.room.roomdb
+package com.example.compnote.data.data_source.locale.room.dao
 
 import androidx.room.*
-import com.example.compnote.data.data_source.models.NoteEntity
+import com.example.compnote.data.data_source.locale.models.NoteEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -1,6 +1,6 @@
 package com.example.compnote.data.mappers
 
-import com.example.compnote.data.data_source.models.NoteEntity
+import com.example.compnote.data.data_source.locale.models.NoteEntity
 import com.example.compnote.domain.models.Note
 
 class NoteListMapper : BaseMapper<List<NoteEntity>, List<Note>> {

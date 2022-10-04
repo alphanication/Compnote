@@ -1,10 +1,10 @@
-package com.example.compnote.data.data_source.room
+package com.example.compnote.data.data_source.locale.room.sources
 
 import com.example.compnote.data.mappers.NoteListMapper
 import com.example.compnote.data.mappers.NoteMapper
 import com.example.compnote.data.data_source.sources.NoteDataSource
-import com.example.compnote.data.data_source.models.NoteEntity
-import com.example.compnote.data.data_source.room.roomdb.NoteRoomDao
+import com.example.compnote.data.data_source.locale.models.NoteEntity
+import com.example.compnote.data.data_source.locale.room.dao.NoteRoomDao
 import com.example.compnote.domain.models.Note
 import com.example.compnote.domain.models.Response
 import kotlinx.coroutines.cancel

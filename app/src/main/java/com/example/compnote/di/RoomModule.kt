@@ -2,8 +2,8 @@ package com.example.compnote.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.compnote.data.data_source.room.roomdb.AppRoomDatabase
-import com.example.compnote.data.data_source.room.roomdb.NoteRoomDao
+import com.example.compnote.data.data_source.locale.room.db.AppRoomDatabase
+import com.example.compnote.data.data_source.locale.room.dao.NoteRoomDao
 import com.example.compnote.data.data_source.util.ConstantsStorage
 import dagger.Module
 import dagger.Provides

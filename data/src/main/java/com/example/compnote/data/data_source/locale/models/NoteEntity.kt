@@ -1,4 +1,4 @@
-package com.example.compnote.data.data_source.models
+package com.example.compnote.data.data_source.locale.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

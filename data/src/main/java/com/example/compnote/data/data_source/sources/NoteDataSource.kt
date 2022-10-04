@@ -1,6 +1,6 @@
 package com.example.compnote.data.data_source.sources
 
-import com.example.compnote.data.data_source.models.NoteEntity
+import com.example.compnote.data.data_source.locale.models.NoteEntity
 import com.example.compnote.domain.models.Note
 import com.example.compnote.domain.models.Response
 import kotlinx.coroutines.flow.Flow
