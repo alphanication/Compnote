@@ -5,6 +5,7 @@ import com.example.compnote.domain.models.Response
 import kotlinx.coroutines.flow.Flow
 
 interface NoteRepository {
+
     suspend fun readAll(): Flow<Response<List<Note>>>
 
     suspend fun add(note: Note): Flow<Response<Boolean>>
