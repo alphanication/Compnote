@@ -1,6 +1,6 @@
-package com.example.compnote.data.mappers
+package com.example.compnote.data.utils
 
-interface Mapper<E, D> {
+interface BaseMapper<E, D> {
 
     fun mapFromEntity(type: E): D
 
