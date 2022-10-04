@@ -1,4 +1,4 @@
-package com.example.compnote.data.utils
+package com.example.compnote.data.mappers
 
 interface BaseMapper<E, D> {
 

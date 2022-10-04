@@ -1,7 +1,6 @@
 package com.example.compnote.data.mappers
 
 import com.example.compnote.data.storage.models.NoteEntity
-import com.example.compnote.data.utils.BaseMapper
 import com.example.compnote.domain.models.Note
 
 class NoteMapper : BaseMapper<NoteEntity, Note> {
