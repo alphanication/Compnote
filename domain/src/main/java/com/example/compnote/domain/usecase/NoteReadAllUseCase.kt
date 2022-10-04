@@ -5,8 +5,10 @@ import com.example.compnote.domain.models.Response
 import com.example.compnote.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.Flow
 
-class NoteReadAllUseCase(private val noteRepository: NoteRepository) {
-    suspend fun execute(): Flow<Response<List<Note>>> {
-        return noteRepository.readAll()
-    }
+class NoteReadAllUseCase(
+    private val noteRepository: NoteRepository
+) {
+
+    suspend fun execute(): Flow<Response<List<Note>>> =
+        noteRepository.readAll()
 }

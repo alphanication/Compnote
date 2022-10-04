@@ -4,8 +4,10 @@ import com.example.compnote.domain.models.Response
 import com.example.compnote.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.Flow
 
-class NoteDeleteByIdUseCase(private val noteRepository: NoteRepository) {
-    suspend fun execute(id: Int): Flow<Response<Boolean>> {
-        return noteRepository.deleteNoteById(id = id)
-    }
+class NoteDeleteByIdUseCase(
+    private val noteRepository: NoteRepository
+) {
+
+    suspend fun execute(id: Int): Flow<Response<Boolean>> =
+        noteRepository.deleteNoteById(id)
 }

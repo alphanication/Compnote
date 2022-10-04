@@ -5,8 +5,10 @@ import com.example.compnote.domain.models.Response
 import com.example.compnote.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.Flow
 
-class NoteGetByIdUseCase(private val noteRepository: NoteRepository) {
-    suspend fun execute(id: Int): Flow<Response<Note>> {
-        return noteRepository.getNoteById(id = id)
-    }
+class NoteGetByIdUseCase(
+    private val noteRepository: NoteRepository
+) {
+
+    suspend fun execute(id: Int): Flow<Response<Note>> =
+        noteRepository.getNoteById(id)
 }
