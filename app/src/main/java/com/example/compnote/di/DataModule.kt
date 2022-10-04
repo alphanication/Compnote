@@ -1,7 +1,7 @@
 package com.example.compnote.di
 
 import com.example.compnote.data.repository.NoteRepositoryImpl
-import com.example.compnote.data.data_source.NoteDataSource
+import com.example.compnote.data.data_source.sources.NoteDataSource
 import com.example.compnote.data.data_source.room.NoteDataSourceRoomImpl
 import com.example.compnote.data.data_source.room.roomdb.NoteRoomDao
 import com.example.compnote.domain.repository.NoteRepository

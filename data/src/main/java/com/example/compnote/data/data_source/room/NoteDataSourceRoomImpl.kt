@@ -2,7 +2,7 @@ package com.example.compnote.data.data_source.room
 
 import com.example.compnote.data.mappers.NoteListMapper
 import com.example.compnote.data.mappers.NoteMapper
-import com.example.compnote.data.data_source.NoteDataSource
+import com.example.compnote.data.data_source.sources.NoteDataSource
 import com.example.compnote.data.data_source.models.NoteEntity
 import com.example.compnote.data.data_source.room.roomdb.NoteRoomDao
 import com.example.compnote.domain.models.Note

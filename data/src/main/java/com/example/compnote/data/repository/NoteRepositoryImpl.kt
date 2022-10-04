@@ -1,7 +1,7 @@
 package com.example.compnote.data.repository
 
 import com.example.compnote.data.mappers.NoteMapper
-import com.example.compnote.data.data_source.NoteDataSource
+import com.example.compnote.data.data_source.sources.NoteDataSource
 import com.example.compnote.domain.models.Note
 import com.example.compnote.domain.models.Response
 import com.example.compnote.domain.repository.NoteRepository
