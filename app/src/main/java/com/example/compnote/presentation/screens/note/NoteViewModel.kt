@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.compnote.domain.models.Note
-import com.example.compnote.domain.models.Response
+import com.example.compnote.domain.models.Resource
 import com.example.compnote.domain.usecase.NoteDeleteByIdUseCase
 import com.example.compnote.domain.usecase.NoteGetByIdUseCase
 import com.example.compnote.domain.usecase.NoteUpdateUseCase
@@ -34,9 +34,9 @@ class NoteViewModel @Inject constructor(
         viewModelScope.launch {
             noteGetByIdUseCase.execute(id = id).collect { response ->
                 when (response) {
-                    is Response.Loading -> {}
-                    is Response.Fail -> {}
-                    is Response.Success -> {
+                    is Resource.Loading -> {}
+                    is Resource.Fail -> {}
+                    is Resource.Success -> {
                         Log.d("alpha33", "getNoteById: ${response.data.title}")
                         this@NoteViewModel.note.postValue(response.data)
                     }
@@ -49,9 +49,9 @@ class NoteViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             noteUpdateUseCase.execute(note = note).collect { response ->
                 when (response) {
-                    is Response.Loading -> {}
-                    is Response.Fail -> _resultUpdateNote.postValue(false)
-                    is Response.Success -> _resultUpdateNote.postValue(true)
+                    is Resource.Loading -> {}
+                    is Resource.Fail -> _resultUpdateNote.postValue(false)
+                    is Resource.Success -> _resultUpdateNote.postValue(true)
                 }
             }
         }
@@ -61,12 +61,12 @@ class NoteViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             noteDeleteByIdUseCase.execute(id = id).collect { response ->
                 when (response) {
-                    is Response.Loading -> {}
-                    is Response.Fail -> {
+                    is Resource.Loading -> {}
+                    is Resource.Fail -> {
                         Log.d("alpha33", "deleteNoteById fail: ${response.e}")
                         _resultDeleteNote.postValue(false)
                     }
-                    is Response.Success -> {
+                    is Resource.Success -> {
                         Log.d("alpha33", "deleteNoteById success: ${response.data}")
                         _resultDeleteNote.postValue(true)
                     }

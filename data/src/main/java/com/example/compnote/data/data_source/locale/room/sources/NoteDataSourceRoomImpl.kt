@@ -6,7 +6,7 @@ import com.example.compnote.data.data_source.sources.NoteDataSource
 import com.example.compnote.data.data_source.locale.models.NoteEntity
 import com.example.compnote.data.data_source.locale.room.dao.NoteRoomDao
 import com.example.compnote.domain.models.Note
-import com.example.compnote.domain.models.Response
+import com.example.compnote.domain.models.Resource
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -18,94 +18,94 @@ class NoteDataSourceRoomImpl @Inject constructor(
     private val noteRoomDao: NoteRoomDao
 ) : NoteDataSource {
 
-    override suspend fun readAll(): Flow<Response<List<Note>>> = callbackFlow {
-        trySend(Response.Loading())
+    override suspend fun readAll(): Flow<Resource<List<Note>>> = callbackFlow {
+        trySend(Resource.Loading())
 
         try {
             noteRoomDao.getAllNotes().collect { listNoteEntity ->
                 trySend(
-                    Response.Success(
+                    Resource.Success(
                         data = NoteListMapper().mapFromEntity(type = listNoteEntity)
                     )
                 )
             }
         } catch (e: Exception) {
-            trySend(Response.Fail(e = e))
+            trySend(Resource.Fail(e = e))
         }
 
         awaitClose { this.cancel() }
     }
 
-    override suspend fun add(note: NoteEntity): Flow<Response<Boolean>> = callbackFlow {
-        trySend(Response.Loading())
+    override suspend fun add(note: NoteEntity): Flow<Resource<Boolean>> = callbackFlow {
+        trySend(Resource.Loading())
 
         try {
             noteRoomDao.addNote(note = note)
-            trySend(Response.Success(data = true))
+            trySend(Resource.Success(data = true))
         } catch (e: Exception) {
-            trySend(Response.Fail(e = e))
+            trySend(Resource.Fail(e = e))
         }
 
         awaitClose { this.cancel() }
     }
 
-    override suspend fun update(note: NoteEntity): Flow<Response<Boolean>> = callbackFlow {
-        trySend(Response.Loading())
+    override suspend fun update(note: NoteEntity): Flow<Resource<Boolean>> = callbackFlow {
+        trySend(Resource.Loading())
 
         try {
             noteRoomDao.updateNote(note = note)
-            trySend(Response.Success(data = true))
+            trySend(Resource.Success(data = true))
         } catch (e: Exception) {
-            trySend(Response.Fail(e = e))
+            trySend(Resource.Fail(e = e))
         }
 
         awaitClose { this.cancel() }
     }
 
-    override suspend fun deleteNoteById(id: Int): Flow<Response<Boolean>> = callbackFlow {
-        trySend(Response.Loading())
+    override suspend fun deleteNoteById(id: Int): Flow<Resource<Boolean>> = callbackFlow {
+        trySend(Resource.Loading())
 
         try {
             noteRoomDao.deleteNoteById(id = id)
-            trySend(Response.Success(data = true))
+            trySend(Resource.Success(data = true))
         } catch (e: Exception) {
-            trySend(Response.Fail(e = e))
+            trySend(Resource.Fail(e = e))
         }
 
         awaitClose { this.cancel() }
     }
 
-    override suspend fun getNoteById(id: Int): Flow<Response<Note>> = callbackFlow {
-        trySend(Response.Loading())
+    override suspend fun getNoteById(id: Int): Flow<Resource<Note>> = callbackFlow {
+        trySend(Resource.Loading())
 
         try {
             noteRoomDao.getNoteById(id = id).collect { noteEntity ->
                 trySend(
-                    Response.Success(
+                    Resource.Success(
                         data = NoteMapper().mapFromEntity(type = noteEntity)
                     )
                 )
             }
         } catch (e: Exception) {
-            trySend(Response.Fail(e = e))
+            trySend(Resource.Fail(e = e))
         }
 
         awaitClose { this.cancel() }
     }
 
-    override suspend fun searchByTitle(title: String): Flow<Response<List<Note>>> = flow {
-        emit(Response.Loading())
+    override suspend fun searchByTitle(title: String): Flow<Resource<List<Note>>> = flow {
+        emit(Resource.Loading())
 
         try {
             noteRoomDao.searchByTitle(title = title).collect { listNoteEntity ->
                 emit(
-                    Response.Success(
+                    Resource.Success(
                         data = NoteListMapper().mapFromEntity(type = listNoteEntity)
                     )
                 )
             }
         } catch (e: Exception) {
-            emit(Response.Fail(e = e))
+            emit(Resource.Fail(e = e))
         }
     }
 }

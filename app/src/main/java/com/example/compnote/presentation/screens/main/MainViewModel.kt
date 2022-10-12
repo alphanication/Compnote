@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.compnote.domain.models.Note
-import com.example.compnote.domain.models.Response
+import com.example.compnote.domain.models.Resource
 import com.example.compnote.domain.usecase.NoteReadAllUseCase
 import com.example.compnote.domain.usecase.NoteSearchByTitleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,9 +26,9 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             noteReadAllUseCase.execute().collect { response ->
                 when (response) {
-                    is Response.Loading -> {}
-                    is Response.Fail -> {}
-                    is Response.Success -> {
+                    is Resource.Loading -> {}
+                    is Resource.Fail -> {}
+                    is Resource.Success -> {
                         // this: reversed() so that the latest notes are displayed first
                         this@MainViewModel._allListNote.postValue(response.data.reversed())
                     }
@@ -41,9 +41,9 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             searchByTitleUseCase.execute(title = title).collect { response ->
                 when (response) {
-                    is Response.Loading -> {}
-                    is Response.Fail -> {}
-                    is Response.Success -> {
+                    is Resource.Loading -> {}
+                    is Resource.Fail -> {}
+                    is Resource.Success -> {
                         // this: reversed() so that the latest notes are displayed first
                         this@MainViewModel._allListNote.postValue(response.data.reversed())
                     }

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.compnote.domain.models.Note
-import com.example.compnote.domain.models.Response
+import com.example.compnote.domain.models.Resource
 import com.example.compnote.domain.usecase.NoteAddUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -24,9 +24,9 @@ class AddViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             noteAddUseCase.execute(note = note).collect { response ->
                 when (response) {
-                    is Response.Loading -> {}
-                    is Response.Fail -> _addNoteResult.postValue(false)
-                    is Response.Success -> _addNoteResult.postValue(true)
+                    is Resource.Loading -> {}
+                    is Resource.Fail -> _addNoteResult.postValue(false)
+                    is Resource.Success -> _addNoteResult.postValue(true)
                 }
             }
         }
