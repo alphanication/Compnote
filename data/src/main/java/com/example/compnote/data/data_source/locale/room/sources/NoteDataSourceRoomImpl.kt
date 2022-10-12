@@ -18,94 +18,72 @@ class NoteDataSourceRoomImpl @Inject constructor(
     private val noteRoomDao: NoteRoomDao
 ) : NoteDataSource {
 
-    override suspend fun readAll(): Flow<Resource<List<Note>>> = callbackFlow {
-        trySend(Resource.Loading())
-
+    override suspend fun readAll(): Flow<Resource<List<Note>>> = flow {
         try {
             noteRoomDao.getAllNotes().collect { listNoteEntity ->
-                trySend(
+                emit(
                     Resource.Success(
-                        data = NoteListMapper().mapFromEntity(type = listNoteEntity)
+                        NoteListMapper().mapFromEntity(listNoteEntity)
                     )
                 )
             }
         } catch (e: Exception) {
-            trySend(Resource.Fail(e = e))
+            emit(Resource.Fail(e))
         }
-
-        awaitClose { this.cancel() }
     }
 
-    override suspend fun add(note: NoteEntity): Flow<Resource<Boolean>> = callbackFlow {
-        trySend(Resource.Loading())
-
+    override suspend fun add(note: NoteEntity): Flow<Resource<Boolean>> = flow {
         try {
-            noteRoomDao.addNote(note = note)
-            trySend(Resource.Success(data = true))
+            noteRoomDao.addNote(note)
+            emit(Resource.Success(true))
         } catch (e: Exception) {
-            trySend(Resource.Fail(e = e))
+            emit(Resource.Fail(e))
         }
-
-        awaitClose { this.cancel() }
     }
 
-    override suspend fun update(note: NoteEntity): Flow<Resource<Boolean>> = callbackFlow {
-        trySend(Resource.Loading())
-
+    override suspend fun update(note: NoteEntity): Flow<Resource<Boolean>> = flow {
         try {
-            noteRoomDao.updateNote(note = note)
-            trySend(Resource.Success(data = true))
+            noteRoomDao.updateNote(note)
+            emit(Resource.Success(true))
         } catch (e: Exception) {
-            trySend(Resource.Fail(e = e))
+            emit(Resource.Fail(e))
         }
-
-        awaitClose { this.cancel() }
     }
 
-    override suspend fun deleteNoteById(id: Int): Flow<Resource<Boolean>> = callbackFlow {
-        trySend(Resource.Loading())
-
+    override suspend fun deleteNoteById(id: Int): Flow<Resource<Boolean>> = flow {
         try {
-            noteRoomDao.deleteNoteById(id = id)
-            trySend(Resource.Success(data = true))
+            noteRoomDao.deleteNoteById(id)
+            emit(Resource.Success(true))
         } catch (e: Exception) {
-            trySend(Resource.Fail(e = e))
+            emit(Resource.Fail(e))
         }
-
-        awaitClose { this.cancel() }
     }
 
-    override suspend fun getNoteById(id: Int): Flow<Resource<Note>> = callbackFlow {
-        trySend(Resource.Loading())
-
+    override suspend fun getNoteById(id: Int): Flow<Resource<Note>> = flow {
         try {
-            noteRoomDao.getNoteById(id = id).collect { noteEntity ->
-                trySend(
+            noteRoomDao.getNoteById(id).collect { noteEntity ->
+                emit(
                     Resource.Success(
-                        data = NoteMapper().mapFromEntity(type = noteEntity)
+                        NoteMapper().mapFromEntity(noteEntity)
                     )
                 )
             }
         } catch (e: Exception) {
-            trySend(Resource.Fail(e = e))
+            emit(Resource.Fail(e))
         }
-
-        awaitClose { this.cancel() }
     }
 
     override suspend fun searchByTitle(title: String): Flow<Resource<List<Note>>> = flow {
-        emit(Resource.Loading())
-
         try {
-            noteRoomDao.searchByTitle(title = title).collect { listNoteEntity ->
+            noteRoomDao.searchByTitle(title).collect { listNoteEntity ->
                 emit(
                     Resource.Success(
-                        data = NoteListMapper().mapFromEntity(type = listNoteEntity)
+                        NoteListMapper().mapFromEntity(listNoteEntity)
                     )
                 )
             }
         } catch (e: Exception) {
-            emit(Resource.Fail(e = e))
+            emit(Resource.Fail(e))
         }
     }
 }
